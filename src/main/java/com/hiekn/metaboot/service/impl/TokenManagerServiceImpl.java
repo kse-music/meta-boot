@@ -29,7 +29,7 @@ public class TokenManagerServiceImpl implements TokenManagerService{
 
     @Override
     public TokenModel getToken (String authentication) {
-        if (authentication == null || authentication.length () == 0) {
+        if (authentication == null || authentication.length () < 2) {
             return null;
         }
         String auth = new String(Base64.getDecoder().decode(authentication));
