@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.google.common.collect.Maps;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.result.ErrorCodes;
 import com.hiekn.metaboot.bean.result.RestData;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -33,14 +35,19 @@ public class UserServiceImpl implements UserService {
     private TokenManagerService tokenManagerService;
 
     @Override
-    public RestData<UserBean> listByPage(PageModel pageModel) {
-        List<UserBean> userList = userMapper.getUserList(pageModel);
+    public RestData<UserBean> listByPage(PageModel pageModel,Map<String,Object> params) {
+        if(Objects.isNull(params)){
+            params = Maps.newHashMap();
+        }
+        params.put("pageNo",pageModel.getPageNo());
+        params.put("pageSize",pageModel.getPageSize());
+        List<UserBean> userList = userMapper.pageSelect(params);
         logger.info("请使用logger替代System.out.println！！！");
-        return new RestData<>(userList,userMapper.count());
+        return new RestData<>(userList,userMapper.pageCount(params));
     }
 
     @Override
-    public UserBean get(Integer id) {
+    public UserBean getById(Object id) {
         return userMapper.selectById(id);
     }
 
@@ -51,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserBean> list() {
-        return userMapper.getUserList(null);
+        return userMapper.list();
     }
 
     @Override
@@ -62,6 +69,11 @@ public class UserServiceImpl implements UserService {
         }
         userMapper.insert(userBean);
         return userBean;
+    }
+
+    @Override
+    public void deleteById(Object id) {
+        userMapper.deleteById(id);
     }
 
 
@@ -87,8 +99,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void logout(String authentication) {
-        TokenModel tokenModel = tokenManagerService.getToken(authentication);
+    public void logout(TokenModel tokenModel) {
         if(Objects.nonNull(tokenModel)){
             tokenManagerService.deleteToken(tokenModel.getUserId());
         }
