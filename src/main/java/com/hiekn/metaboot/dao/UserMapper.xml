@@ -8,9 +8,7 @@
 
     <select id="pageSelect" resultType="userBean">
         SELECT * FROM user
-        <if test="pageNo != null and pageSize != null">
             LIMIT #{pageNo},#{pageSize}
-        </if>
     </select>
 
     <select id="pageCount" resultType="int">
