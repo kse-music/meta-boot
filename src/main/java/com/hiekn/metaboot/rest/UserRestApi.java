@@ -40,7 +40,7 @@ public class UserRestApi {
     @ApiOperation("获取")
     public RestResp<UserBean> get(@ApiParam("t+u")@BeanParam TokenModel tokenModel,
                                   @ApiParam(required = true)@QueryParam("id") Integer id) {
-        return new RestResp<>(userService.getById(id));
+        return new RestResp<>(userService.getByPrimaryKey(id));
     }
 
     @GET

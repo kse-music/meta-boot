@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserBean getById(Object id) {
-        return userMapper.selectById(id);
+    public UserBean getByPrimaryKey(Object id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -72,8 +72,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Object id) {
-        userMapper.deleteById(id);
+    public void deleteByPrimaryKey(Object id) {
+        userMapper.deleteByPrimaryKey(id);
     }
 
 

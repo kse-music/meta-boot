@@ -19,7 +19,7 @@ public interface CommonMapper<T> {
      * @param id 主键id
      * @return 影响的行数
      */
-    int deleteById(Object id);
+    int deleteByPrimaryKey(Object id);
 
     /**
      *
@@ -28,7 +28,7 @@ public interface CommonMapper<T> {
      * @param id 主键id
      * @return 单个对象
      */
-    T selectById(Object id);
+    T selectByPrimaryKey(Object id);
 
     /**
      *

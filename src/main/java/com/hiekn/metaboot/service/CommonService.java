@@ -21,7 +21,7 @@ public interface CommonService<T> {
      *
      * @param id 主键id
      */
-    void deleteById(Object id);
+    void deleteByPrimaryKey(Object id);
 
     /**
      *
@@ -30,7 +30,7 @@ public interface CommonService<T> {
      * @param id 主键id
      * @return 单个对象
      */
-    T getById(Object id);
+    T getByPrimaryKey(Object id);
 
     /**
      *

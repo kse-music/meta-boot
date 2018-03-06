@@ -15,7 +15,7 @@
         SELECT COUNT(*) FROM user
     </select>
 
-    <select id="selectById" resultType="userBean">
+    <select id="selectByPrimaryKey" resultType="userBean">
         SELECT * FROM user WHERE id=#{id}
     </select>
     <select id="selectByUsername" resultType="userBean">
