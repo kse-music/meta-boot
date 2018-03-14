@@ -22,7 +22,7 @@ public class ExceptionHandler implements ExceptionMapper<Exception> {
 	
 	private static final Log logger = LogFactory.getLog(ExceptionHandler.class);
 
-    @Value("${base.package}")
+    @Value("${jersey.swagger.base-package}")
     private String basePackage;
 	
 	@Override
