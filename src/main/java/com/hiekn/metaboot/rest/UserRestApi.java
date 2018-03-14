@@ -4,6 +4,7 @@ import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.result.RestData;
 import com.hiekn.metaboot.bean.result.RestResp;
 import com.hiekn.metaboot.bean.vo.PageModel;
+import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.JsonUtils;
 import io.swagger.annotations.Api;
@@ -29,30 +30,30 @@ public class UserRestApi {
     @GET
     @Path("/list/page")
     @ApiOperation("分页")
-    public RestResp<RestData<UserBean>> listByPage(@ApiParam("BASE64(userId_token)")@QueryParam("authentication") String authentication,
+    public RestResp<RestData<UserBean>> listByPage(@ApiParam("t+u")@BeanParam TokenModel tokenModel,
                                                    @BeanParam PageModel pageModel) {
-        return new RestResp<>(userService.listByPage(pageModel));
+        return new RestResp<>(userService.listByPage(pageModel,null));
     }
 
     @GET
     @Path("/get")
     @ApiOperation("获取")
-    public RestResp<UserBean> get(@ApiParam("BASE64(userId_token)")@QueryParam("authentication") String authentication,
+    public RestResp<UserBean> get(@ApiParam("t+u")@BeanParam TokenModel tokenModel,
                                   @ApiParam(required = true)@QueryParam("id") Integer id) {
-        return new RestResp<>(userService.get(id));
+        return new RestResp<>(userService.getByPrimaryKey(id));
     }
 
     @GET
     @Path("/list")
     @ApiOperation("列表")
-    public RestResp<List<UserBean>> list(@ApiParam("BASE64(userId_token)")@QueryParam("authentication") String authentication) {
+    public RestResp<List<UserBean>> list(@ApiParam("t+u")@BeanParam TokenModel tokenModel) {
         return new RestResp<>(userService.list());
     }
 
     @POST
     @Path("/add")
     @ApiOperation("新增")
-    public RestResp<UserBean> add(@ApiParam("BASE64(userId_token)")@QueryParam("authentication") String authentication,
+    public RestResp<UserBean> add(@ApiParam("t+u")@BeanParam TokenModel tokenModel,
                                   @ApiParam(required = true)@FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         userService.save(userBean);
@@ -70,8 +71,8 @@ public class UserRestApi {
     @GET
     @Path("/logout")
     @ApiOperation("登出")
-    public RestResp<Object> logout(@ApiParam(required=true)@QueryParam("authentication") String authentication){
-        userService.logout(authentication);
+    public RestResp<Object> logout(@ApiParam("t+u")@BeanParam TokenModel tokenModel){
+        userService.logout(tokenModel);
         return new RestResp<>();
     }
 

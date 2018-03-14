@@ -14,17 +14,15 @@ public interface TokenManagerService {
 
     /**
      * 检查 token 是否有效
-     * @param authentication authentication
      * @return 是否有效
      */
-    boolean checkToken(String authentication);
+    boolean checkToken(TokenModel tokenModel);
 
     /**
      * 从字符串中解析 token
-     * @param authentication 加密后的字符串
      * @return
      */
-    TokenModel getToken(String authentication);
+    TokenModel getToken(TokenModel tokenModel);
 
     /**
      * 清除 token

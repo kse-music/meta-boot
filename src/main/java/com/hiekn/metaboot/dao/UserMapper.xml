@@ -2,18 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiekn.metaboot.dao.UserMapper">
   
-    <select id="getUserList" resultType="userBean">
+    <select id="list" resultType="userBean">
         SELECT * FROM user
-        <if test="pageNo != null and pageSize != null">
-            LIMIT #{pageNo},#{pageSize}
-        </if>
     </select>
 
-    <select id="count" resultType="int">
+    <select id="pageSelect" resultType="userBean">
+        SELECT * FROM user
+            LIMIT #{pageNo},#{pageSize}
+    </select>
+
+    <select id="pageCount" resultType="int">
         SELECT COUNT(*) FROM user
     </select>
 
-    <select id="selectById" resultType="userBean">
+    <select id="selectByPrimaryKey" resultType="userBean">
         SELECT * FROM user WHERE id=#{id}
     </select>
     <select id="selectByUsername" resultType="userBean">

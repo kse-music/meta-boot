@@ -1,7 +1,9 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.hiekn.metaboot.bean.result.ErrorCodes;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.conf.Constants;
+import com.hiekn.metaboot.exception.ServiceException;
 import com.hiekn.metaboot.service.TokenManagerService;
 import com.hiekn.metaboot.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,27 +30,26 @@ public class TokenManagerServiceImpl implements TokenManagerService{
     }
 
     @Override
-    public TokenModel getToken (String authentication) {
-        if (authentication == null || authentication.length () < 2) {
-            return null;
+    public TokenModel getToken (TokenModel tokenModel) {
+        String authentication = tokenModel.getAuthentication();
+        if(authentication == null){
+            throw ServiceException.newInstance(ErrorCodes.UN_LOGIN_ERROR);
         }
-        String auth = new String(Base64.getDecoder().decode(authentication));
-        String [] param = auth.split ("_");
-        if (param.length != 2) {
-            return null;
+        if(authentication.length() < 33){
+            throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
         }
-        // 使用 userId 和源 token 简单拼接成的 token，可以增加加密措施
-        long userId = Long.valueOf (param [0]);
-        String token = param [1];
-        return new TokenModel (userId, token);
+        try {
+            tokenModel.setUserId(Integer.valueOf(authentication.substring(32)));
+            tokenModel.setToken(authentication.substring(0,32));
+        } catch (Exception e) {
+            throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
+        }
+        return tokenModel;
     }
 
     @Override
-    public boolean checkToken (String authentication) {
-        TokenModel model = getToken(authentication);
-        if (model == null) {
-            return false;
-        }
+    public boolean checkToken (TokenModel tokenModel) {
+        TokenModel model = getToken(tokenModel);
         Object token = redisTemplate.boundValueOps (model.getUserId ()).get();
         if (token == null || !token.equals (model.getToken ())) {
             return false;
