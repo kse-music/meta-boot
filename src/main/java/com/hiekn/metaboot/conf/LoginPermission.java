@@ -1,10 +1,9 @@
 package com.hiekn.metaboot.conf;
 
-import com.hiekn.metaboot.bean.result.ErrorCodes;
+import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.exception.ServiceException;
 import com.hiekn.metaboot.service.TokenManagerService;
-import com.hiekn.metaboot.util.CacheUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
-import java.util.Objects;
 
 @Aspect
 @Configuration

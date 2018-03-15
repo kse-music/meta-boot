@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.service.impl;
 
-import com.hiekn.metaboot.bean.result.ErrorCodes;
+import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.conf.Constants;
 import com.hiekn.metaboot.exception.ServiceException;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 @Service

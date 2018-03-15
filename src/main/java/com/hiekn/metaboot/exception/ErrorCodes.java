@@ -1,4 +1,4 @@
-package com.hiekn.metaboot.bean.result;
+package com.hiekn.metaboot.exception;
 
 import java.util.Objects;
 

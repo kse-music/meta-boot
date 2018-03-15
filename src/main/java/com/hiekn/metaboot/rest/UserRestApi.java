@@ -1,8 +1,8 @@
 package com.hiekn.metaboot.rest;
 
+import com.hiekn.boot.web.jersey.result.RestData;
+import com.hiekn.boot.web.jersey.result.RestResp;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.bean.result.RestData;
-import com.hiekn.metaboot.bean.result.RestResp;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.service.UserService;

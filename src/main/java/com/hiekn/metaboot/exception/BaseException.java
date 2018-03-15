@@ -1,8 +1,6 @@
 package com.hiekn.metaboot.exception;
 
 
-import com.hiekn.metaboot.bean.result.ErrorCodes;
-
 /**
  * 异常基类，各个模块的运行期异常均继承与该类 
  */

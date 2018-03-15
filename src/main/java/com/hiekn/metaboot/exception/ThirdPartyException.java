@@ -1,8 +1,6 @@
 package com.hiekn.metaboot.exception;
 
 
-import com.hiekn.metaboot.bean.result.ErrorCodes;
-
 public class ThirdPartyException extends BaseException {
 
     private ThirdPartyException(ErrorCodes code) {

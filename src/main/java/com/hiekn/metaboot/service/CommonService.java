@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.service;
 
-import com.hiekn.metaboot.bean.result.RestData;
+import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.vo.PageModel;
 
 import java.util.List;

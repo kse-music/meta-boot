@@ -1,9 +1,9 @@
 package com.hiekn.metaboot.service.impl;
 
 import com.google.common.collect.Maps;
+import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.bean.result.ErrorCodes;
-import com.hiekn.metaboot.bean.result.RestData;
+import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private TokenManagerService tokenManagerService;
 
     @Override
-    public RestData<UserBean> listByPage(PageModel pageModel,Map<String,Object> params) {
+    public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
         if(Objects.isNull(params)){
             params = Maps.newHashMap();
         }
