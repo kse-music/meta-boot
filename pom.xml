@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.hiekn.boot</groupId>
         <artifactId>jersey2-swagger-parent</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
 
     <properties>
@@ -27,7 +27,6 @@
         <dependency>
             <groupId>com.hiekn.boot</groupId>
             <artifactId>jersey2-swagger-spring-boot-starter</artifactId>
-            <version>1.0.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
