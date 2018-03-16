@@ -11,13 +11,13 @@ import org.springframework.context.annotation.PropertySource;
 public class Constants {
 
     public static String sseLocation;
-    public static long tokenExpiresTimeDay;
+    public static int tokenExpiresTimeDay;
 
     public static void setSseLocation(String sseLocation) {
         Constants.sseLocation = sseLocation;
     }
 
-    public static void setTokenExpiresTimeDay(long tokenExpiresTimeDay) {
+    public static void setTokenExpiresTimeDay(int tokenExpiresTimeDay) {
         Constants.tokenExpiresTimeDay = tokenExpiresTimeDay;
     }
 }

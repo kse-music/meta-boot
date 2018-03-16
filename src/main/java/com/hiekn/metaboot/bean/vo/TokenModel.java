@@ -1,8 +1,6 @@
 package com.hiekn.metaboot.bean.vo;
 
-import io.swagger.annotations.ApiParam;
-
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.HeaderParam;
 
 /**
  * 约定前台传入的验证为 t+u
@@ -13,8 +11,7 @@ public class TokenModel {
 
     private String token;
 
-    @QueryParam("authentication")
-    @ApiParam("t+u")
+    @HeaderParam("Authentication")
     private String authentication;
 
     public TokenModel(){}

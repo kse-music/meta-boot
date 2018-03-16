@@ -3,20 +3,21 @@ package com.hiekn.metaboot.service.impl;
 import com.google.common.collect.Maps;
 import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
+import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
-import com.hiekn.metaboot.service.TokenManagerService;
 import com.hiekn.metaboot.service.UserService;
+import com.hiekn.metaboot.util.JwtToken;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Autowired
-    private TokenManagerService tokenManagerService;
+    private RedisTemplate redisTemplate;
 
     @Override
     public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
@@ -91,8 +92,8 @@ public class UserServiceImpl implements UserService {
         }
         UserLoginBean userLoginBean = new UserLoginBean();
         BeanUtils.copyProperties(user,userLoginBean);
-        TokenModel tokenModel = tokenManagerService.createToken(user.getId());
-        userLoginBean.setToken(tokenModel.getToken());
+        String token = JwtToken.createToken(user.getId());
+        userLoginBean.setToken(token);
         userLoginBean.setPassword(null);
         return userLoginBean;
     }
@@ -100,9 +101,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logout(TokenModel tokenModel) {
-        if(Objects.nonNull(tokenModel)){
-            tokenManagerService.deleteToken(tokenModel.getUserId());
-        }
+        redisTemplate.delete (tokenModel.getUserId());
     }
 
 }
