@@ -14,9 +14,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Objects;
 
 @Aspect
 @Configuration
@@ -32,23 +30,17 @@ public class LoginPermission {
     @Around("@within(org.springframework.stereotype.Controller)")
     public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable{
         String name = pjp.getSignature().getName();
-        Object[] args = pjp.getArgs();
         if(!excludeMethod.contains(name)){
             RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-            ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-            HttpServletRequest req = sra.getRequest();
-            String authorization = req.getHeader("Authorization");
-            String token = JwtToken.getToken(authorization);
-            if(Objects.isNull(token)){
-                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
-            }
-            Integer userId = JwtToken.checkToken(token);
-            Object token2 = redisTemplate.boundValueOps (userId).get();
+            ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+            String token = JwtToken.getToken(sra.getRequest());
+            Integer userId = JwtToken.getUserId(token);
+            Object token2 = redisTemplate.boundValueOps(userId).get();
             if (token2 == null || !token2.equals (token)) {
                 throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
             }
         }
-        return pjp.proceed(args);
+        return pjp.proceed();
     }
 
 }

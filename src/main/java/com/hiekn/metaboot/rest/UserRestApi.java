@@ -70,7 +70,7 @@ public class UserRestApi {
     @Path("/logout")
     @ApiOperation("登出")
     public RestResp<Object> logout(@Context HttpServletRequest request){
-        userService.logout(request.getHeader("Authorization"));
+        userService.logout();
         return new RestResp<>();
     }
 

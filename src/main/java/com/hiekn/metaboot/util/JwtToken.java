@@ -3,6 +3,7 @@ package com.hiekn.metaboot.util;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
 import com.hiekn.metaboot.conf.Constants;
@@ -10,12 +11,13 @@ import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public class JwtToken {
+public final class JwtToken {
 
     private final static String SECRET = "SECRET";
 
@@ -49,7 +51,7 @@ public class JwtToken {
         }
     }
 
-    public static Integer checkToken(String token){
+    public static Map<String, Claim> checkToken(String token){
         JWTVerifier verifier = JWT.require(getAlgorithm()).build();
         DecodedJWT jwt;
         try {
@@ -58,14 +60,28 @@ public class JwtToken {
             throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
         }
 
-        return jwt.getClaims().get("userId").asInt();
+        return jwt.getClaims();
     }
 
-    public static String getToken(String authorization){
-        if(StringUtils.isBlank(authorization)){
-            return null;
-        }
+    public static Integer getUserId(String token){
+        Map<String, Claim> claimMap = checkToken(token);
+        return claimMap.get("userId").asInt();
+    }
+
+    public static Integer getUserId(HttpServletRequest request){
+        String authorization = getAuthorization(request);
+        return getUserId(authorization.split(" ")[1]);
+    }
+    public static String getToken(HttpServletRequest request){
+        String authorization = getAuthorization(request);
         return authorization.split(" ")[1];
+    }
+    private static String getAuthorization(HttpServletRequest request){
+        String authorization = request.getHeader("Authorization");
+        if(StringUtils.isBlank(authorization)){
+            throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
+        }
+        return authorization;
     }
 
 }
