@@ -8,6 +8,7 @@ import com.google.common.collect.Maps;
 import com.hiekn.metaboot.conf.Constants;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -53,6 +54,13 @@ public class JwtToken {
         }
 
         return jwt.getClaims().get("userId").asInt();
+    }
+
+    public static String getToken(String authorization){
+        if(StringUtils.isBlank(authorization)){
+            return null;
+        }
+        return authorization.split(" ")[1];
     }
 
 }

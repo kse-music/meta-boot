@@ -1,17 +1,11 @@
 package com.hiekn.metaboot.bean.vo;
 
-import javax.ws.rs.HeaderParam;
-
-/**
- * 约定前台传入的验证为 t+u
- */
 public class TokenModel {
 
     private long userId;
 
     private String token;
 
-    @HeaderParam("Authentication")
     private String authentication;
 
     public TokenModel(){}
@@ -19,6 +13,12 @@ public class TokenModel {
     public TokenModel(long userId, String token) {
         this.userId = userId;
         this.token = token;
+    }
+
+    public TokenModel(long userId, String token, String authentication) {
+        this.userId = userId;
+        this.token = token;
+        this.authentication = authentication;
     }
 
     public long getUserId() {

@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.PageModel;
-import com.hiekn.metaboot.bean.vo.TokenModel;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
@@ -100,8 +99,15 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void logout(TokenModel tokenModel) {
-        redisTemplate.delete (tokenModel.getUserId());
+    public void logout(String authorization) {
+        String token = JwtToken.getToken(authorization);
+        Integer userId = null;
+        try {
+            userId = JwtToken.checkToken(token);
+        } catch (Exception e) {
+        }
+
+        redisTemplate.delete (userId);
     }
 
 }
