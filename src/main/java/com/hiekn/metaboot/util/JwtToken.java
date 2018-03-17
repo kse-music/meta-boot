@@ -31,27 +31,26 @@ public class JwtToken {
         Map<String,Object> map = Maps.newHashMap();
         map.put("alg","HS256");
         map.put("typ","JWT");
-        try {
-            return JWT.create()
-                    .withHeader(map)
-                    .withClaim("userId",userId)
-                    .withExpiresAt(expireDate)
-                    .withIssuedAt(iaDate)
-                    .withIssuer("hiekn")
-                    .sign(Algorithm.HMAC256(SECRET));
-        }catch (Exception e) {
-            throw ServiceException.newInstance(ErrorCodes.TOKEN_CREATE_ERROR);
-        }
+        return JWT.create()
+                .withHeader(map)
+                .withClaim("userId",userId)
+                .withExpiresAt(expireDate)
+                .withIssuedAt(iaDate)
+                .withIssuer("hiekn")
+                .sign(getAlgorithm());
 
     }
 
-    public static Integer checkToken(String token){
-        JWTVerifier verifier;
+    private static Algorithm getAlgorithm(){
         try {
-            verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+            return Algorithm.HMAC256(SECRET);
         } catch (UnsupportedEncodingException e) {
             throw ServiceException.newInstance(ErrorCodes.TOKEN_CREATE_ERROR);
         }
+    }
+
+    public static Integer checkToken(String token){
+        JWTVerifier verifier = JWT.require(getAlgorithm()).build();
         DecodedJWT jwt;
         try {
             jwt = verifier.verify(token);
