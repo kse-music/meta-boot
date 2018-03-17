@@ -6,6 +6,7 @@ import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.JsonUtils;
+import com.hiekn.metaboot.util.JwtToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -70,7 +71,7 @@ public class UserRestApi {
     @Path("/logout")
     @ApiOperation("登出")
     public RestResp<Object> logout(@Context HttpServletRequest request){
-        userService.logout();
+        userService.logout(JwtToken.getUserId(request));
         return new RestResp<>();
     }
 

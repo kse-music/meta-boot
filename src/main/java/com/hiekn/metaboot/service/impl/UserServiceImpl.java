@@ -19,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Context;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -35,9 +33,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RedisTemplate redisTemplate;
-
-    @Context
-    private HttpServletRequest request;
 
     @Override
     public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
@@ -104,8 +99,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void logout() {
-        Integer userId = JwtToken.getUserId(request);
+    public void logout(Integer userId) {
         redisTemplate.delete (userId);
     }
 
