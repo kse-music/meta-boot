@@ -11,6 +11,4 @@ public interface TokenManageService {
     Map<String, Claim> checkToken(String token);
     Integer getCurrentUserId();
     String getToken();
-
-
 }
