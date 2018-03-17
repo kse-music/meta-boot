@@ -8,7 +8,6 @@ import java.util.Map;
 public interface TokenManageService {
     String SECRET = "SECRET";
     String createToken(Integer userId);
-    Algorithm getAlgorithm();
     Map<String, Claim> checkToken(String token);
     Integer getCurrentUserId();
     String getToken();

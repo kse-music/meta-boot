@@ -47,8 +47,7 @@ public class TokenManageServiceImpl implements TokenManageService {
                 .sign(getAlgorithm());
     }
 
-    @Override
-    public Algorithm getAlgorithm() {
+    private Algorithm getAlgorithm() {
         try {
             return Algorithm.HMAC256(SECRET);
         } catch (UnsupportedEncodingException e) {
