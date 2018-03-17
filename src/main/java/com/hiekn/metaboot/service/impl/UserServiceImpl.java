@@ -8,8 +8,8 @@ import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
+import com.hiekn.metaboot.service.TokenManageService;
 import com.hiekn.metaboot.service.UserService;
-import com.hiekn.metaboot.util.JwtToken;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private TokenManageService tokenManageService;
 
     @Override
     public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
@@ -91,7 +94,7 @@ public class UserServiceImpl implements UserService {
         }
         UserLoginBean userLoginBean = new UserLoginBean();
         BeanUtils.copyProperties(user,userLoginBean);
-        String token = JwtToken.createToken(user.getId());
+        String token = tokenManageService.createToken(user.getId());
         userLoginBean.setToken(token);
         userLoginBean.setPassword(null);
         return userLoginBean;
@@ -99,8 +102,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void logout(Integer userId) {
-        redisTemplate.delete (userId);
+    public void logout() {
+        redisTemplate.delete (tokenManageService.getCurrentUserId());
     }
 
 }

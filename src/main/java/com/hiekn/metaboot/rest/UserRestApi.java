@@ -6,16 +6,13 @@ import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.JsonUtils;
-import com.hiekn.metaboot.util.JwtToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -70,8 +67,8 @@ public class UserRestApi {
     @GET
     @Path("/logout")
     @ApiOperation("登出")
-    public RestResp<Object> logout(@Context HttpServletRequest request){
-        userService.logout(JwtToken.getUserId(request));
+    public RestResp<Object> logout(){
+        userService.logout();
         return new RestResp<>();
     }
 

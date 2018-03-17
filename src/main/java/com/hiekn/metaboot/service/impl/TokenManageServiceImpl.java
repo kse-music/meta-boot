@@ -1,4 +1,4 @@
-package com.hiekn.metaboot.util;
+package com.hiekn.metaboot.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -9,7 +9,12 @@ import com.google.common.collect.Maps;
 import com.hiekn.metaboot.conf.Constants;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
+import com.hiekn.metaboot.service.TokenManageService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -17,11 +22,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public final class JwtToken {
+@Service
+public class TokenManageServiceImpl implements TokenManageService {
 
-    private final static String SECRET = "SECRET";
-
-    public static String createToken(Integer userId){
+    @Override
+    public String createToken(Integer userId) {
         //签发时间
         Date iaDate = new Date();
 
@@ -40,10 +45,10 @@ public final class JwtToken {
                 .withIssuedAt(iaDate)
                 .withIssuer("hiekn")
                 .sign(getAlgorithm());
-
     }
 
-    private static Algorithm getAlgorithm(){
+    @Override
+    public Algorithm getAlgorithm() {
         try {
             return Algorithm.HMAC256(SECRET);
         } catch (UnsupportedEncodingException e) {
@@ -51,7 +56,8 @@ public final class JwtToken {
         }
     }
 
-    public static Map<String, Claim> checkToken(String token){
+    @Override
+    public Map<String, Claim> checkToken(String token) {
         JWTVerifier verifier = JWT.require(getAlgorithm()).build();
         DecodedJWT jwt;
         try {
@@ -63,25 +69,26 @@ public final class JwtToken {
         return jwt.getClaims();
     }
 
-    public static Integer getUserId(String token){
-        Map<String, Claim> claimMap = checkToken(token);
+    @Override
+    public Integer getCurrentUserId() {
+        Map<String, Claim> claimMap = checkToken(getToken());
         return claimMap.get("userId").asInt();
     }
 
-    public static Integer getUserId(HttpServletRequest request){
-        String authorization = getAuthorization(request);
-        return getUserId(authorization.split(" ")[1]);
-    }
-    public static String getToken(HttpServletRequest request){
-        String authorization = getAuthorization(request);
+    @Override
+    public String getToken() {
+        String authorization = getAuthorization();
         return authorization.split(" ")[1];
     }
-    private static String getAuthorization(HttpServletRequest request){
+
+    private String getAuthorization(){
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes)ra;
+        HttpServletRequest request = sra.getRequest();
         String authorization = request.getHeader("Authorization");
         if(StringUtils.isBlank(authorization)){
             throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
         }
         return authorization;
     }
-
 }

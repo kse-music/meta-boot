@@ -7,5 +7,5 @@ public interface UserService extends CommonService<UserBean> {
     UserBean getByUsername(String username);
 
     UserLoginBean login(String username, String password);
-    void logout(Integer userId);
+    void logout();
 }
