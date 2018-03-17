@@ -6,9 +6,7 @@ import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.JsonUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -20,6 +18,7 @@ import java.util.List;
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Api("用户模块")
+@ApiImplicitParams({@ApiImplicitParam(paramType = "header", dataType = "string", name = "Authorization",required = true)})
 public class UserRestApi {
 
     @Autowired
