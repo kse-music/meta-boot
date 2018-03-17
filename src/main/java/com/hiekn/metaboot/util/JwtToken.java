@@ -10,6 +10,7 @@ import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -44,8 +45,13 @@ public class JwtToken {
 
     }
 
-    public static Integer checkToken(String token) throws Exception{
-        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+    public static Integer checkToken(String token){
+        JWTVerifier verifier;
+        try {
+            verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
+        } catch (UnsupportedEncodingException e) {
+            throw ServiceException.newInstance(ErrorCodes.TOKEN_CREATE_ERROR);
+        }
         DecodedJWT jwt;
         try {
             jwt = verifier.verify(token);
