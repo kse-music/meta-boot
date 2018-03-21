@@ -77,7 +77,8 @@ public class TokenManageServiceImpl implements TokenManageService {
     @Override
     public String getToken() {
         String authorization = getAuthorization();
-        return authorization.split(" ")[1];
+        String[] str = authorization.split(" ");
+        return str.length == 2?str[1]:null;
     }
 
     private String getAuthorization(){
