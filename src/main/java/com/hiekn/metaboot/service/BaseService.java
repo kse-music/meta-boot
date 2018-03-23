@@ -1,25 +1,27 @@
-package com.hiekn.metaboot.dao;
+package com.hiekn.metaboot.service;
+
+import com.hiekn.boot.web.jersey.result.RestData;
+import com.hiekn.metaboot.bean.vo.PageModel;
 
 import java.util.List;
 import java.util.Map;
 
-public interface CommonMapper<T> {
+public interface BaseService<T> {
     /**
      *
      * 增加一个实体
      * @param pojo 实体对象
-     * @return 影响的行数 0失败，1成功
+     * @return 实体对象
      */
-    int insert(T pojo);
+    T save(T pojo);
 
     /**
      *
      * 通过id删除实体
      *
      * @param id 主键id
-     * @return 影响的行数
      */
-    int deleteByPrimaryKey(Object id);
+    void deleteByPrimaryKey(Object id);
 
     /**
      *
@@ -28,7 +30,7 @@ public interface CommonMapper<T> {
      * @param id 主键id
      * @return 单个对象
      */
-    T selectByPrimaryKey(Object id);
+    T getByPrimaryKey(Object id);
 
     /**
      *
@@ -42,19 +44,10 @@ public interface CommonMapper<T> {
      *
      * 分页查询
      *
+     * @param pageModel 分页参数
      * @param params 查询条件
      * @return 符合条件的对象
      */
-    List<T> pageSelect(Map<String,Object> params);
-
-
-    /**
-     *
-     * 分页查询时，用来统计总条数
-     *
-     * @param params 查询条件
-     * @return 符合条件的结果总数
-     */
-    int pageCount(Map<String,Object> params);
+    RestData<T> listByPage(PageModel pageModel, Map<String,Object> params);
 
 }
