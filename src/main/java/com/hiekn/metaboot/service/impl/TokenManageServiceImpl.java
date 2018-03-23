@@ -3,10 +3,8 @@ package com.hiekn.metaboot.service.impl;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.common.collect.Maps;
-import com.hiekn.metaboot.conf.Constants;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
 import com.hiekn.metaboot.service.TokenManageService;
@@ -32,7 +30,7 @@ public class TokenManageServiceImpl implements TokenManageService {
 
         //过期时间
         Calendar nowTime = Calendar.getInstance();
-        nowTime.add(Calendar.DATE, Constants.tokenExpiresTimeDay);
+        nowTime.add(Calendar.DATE, 7);
         Date expireDate = nowTime.getTime();
 
         Map<String,Object> map = Maps.newHashMap();
@@ -47,6 +45,17 @@ public class TokenManageServiceImpl implements TokenManageService {
                 .sign(getAlgorithm());
     }
 
+    @Override
+    public String createNewToken() {
+        String token = getToken();
+        DecodedJWT jwt = checkToken(token);
+        Date issuedAt = jwt.getIssuedAt();
+        if(System.currentTimeMillis() - issuedAt.getTime() > 3600000){
+            return createToken(jwt.getClaim("userId").asInt());
+        }
+        return null;
+    }
+
     private Algorithm getAlgorithm() {
         try {
             return Algorithm.HMAC256(SECRET);
@@ -56,7 +65,7 @@ public class TokenManageServiceImpl implements TokenManageService {
     }
 
     @Override
-    public Map<String, Claim> checkToken(String token) {
+    public DecodedJWT checkToken(String token) {
         JWTVerifier verifier = JWT.require(getAlgorithm()).build();
         DecodedJWT jwt;
         try {
@@ -65,13 +74,12 @@ public class TokenManageServiceImpl implements TokenManageService {
             throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
         }
 
-        return jwt.getClaims();
+        return jwt;
     }
 
     @Override
     public Integer getCurrentUserId() {
-        Map<String, Claim> claimMap = checkToken(getToken());
-        return claimMap.get("userId").asInt();
+        return checkToken(getToken()).getClaim("userId").asInt();
     }
 
     @Override

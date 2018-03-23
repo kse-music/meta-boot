@@ -33,10 +33,10 @@ public class LoginPermission {
         if(!excludeMethod.contains(name)){
             String token = tokenManageService.getToken();
             Integer userId = tokenManageService.getCurrentUserId();
-            Object token2 = redisTemplate.boundValueOps(userId).get();
-            if (token2 == null || !token2.equals (token)) {
-                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
-            }
+//            Object token2 = redisTemplate.boundValueOps(userId).get();
+//            if (token2 == null || !token2.equals (token)) {
+//                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
+//            }
         }
         return pjp.proceed();
     }
