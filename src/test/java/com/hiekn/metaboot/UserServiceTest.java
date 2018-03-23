@@ -34,7 +34,7 @@ public class UserServiceTest extends MetaBootApplicationTests{
     private TransportClient client;
 
 	@Test
-	public void test(){
+	public void testAssert(){
 		Assert.assertSame(userService,userService);
 		Assert.assertEquals(1, 1);
 		Assert.assertTrue (2 < 3);

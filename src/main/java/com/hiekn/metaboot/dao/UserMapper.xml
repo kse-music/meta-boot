@@ -18,6 +18,9 @@
     <select id="selectByPrimaryKey" resultType="userBean">
         SELECT * FROM user WHERE id=#{id}
     </select>
+    <delete id="deleteByPrimaryKey">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
     <select id="selectByUsername" resultType="userBean">
         SELECT * FROM user WHERE username=#{username}
     </select>
