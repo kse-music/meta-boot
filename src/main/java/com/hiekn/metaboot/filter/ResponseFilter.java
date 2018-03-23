@@ -26,7 +26,7 @@ public class ResponseFilter implements ContainerResponseFilter{
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
 			throws IOException {
         String token = tokenManageService.createNewToken();
-        if(token != null){//重新生成token
+        if(token != null){
             response.setHeader("Authorization",token);
         }
 
