@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Aspect
@@ -32,11 +35,17 @@ public class LoginPermission {
         String name = pjp.getSignature().getName();
         if(!excludeMethod.contains(name)){
             String token = tokenManageService.getToken();
-            Integer userId = tokenManageService.getCurrentUserId();
+            tokenManageService.checkToken(token);
+//            Integer userId = tokenManageService.getCurrentUserId();
 //            Object token2 = redisTemplate.boundValueOps(userId).get();
 //            if (token2 == null || !token2.equals (token)) {
 //                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
 //            }
+            HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+            String newToken = tokenManageService.createNewToken(token);
+            if(newToken != null){
+                response.setHeader("Authorization",newToken);
+            }
         }
         return pjp.proceed();
     }

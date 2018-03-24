@@ -46,8 +46,7 @@ public class TokenManageServiceImpl implements TokenManageService {
     }
 
     @Override
-    public String createNewToken() {
-        String token = getToken();
+    public String createNewToken(String token) {
         DecodedJWT jwt = checkToken(token);
         Date issuedAt = jwt.getIssuedAt();
         if(System.currentTimeMillis() - issuedAt.getTime() > 3600000){
