@@ -8,7 +8,6 @@ import com.hiekn.metaboot.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,9 +34,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
     @Override
-    public List<T> list() {
-        return baseMapper.list();
+    public void updateByPrimaryKeySelective(T pojo) {
+        baseMapper.updateByPrimaryKeySelective(pojo);
     }
+
 
     @Override
     public RestData<T> listByPage(PageModel pageModel, Map<String, Object> params) {

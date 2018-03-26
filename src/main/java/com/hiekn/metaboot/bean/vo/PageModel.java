@@ -17,6 +17,13 @@ public class PageModel {
     @QueryParam("pageSize")
     private Integer pageSize;
 
+    public PageModel(){}
+
+    public PageModel(Integer pageNo, Integer pageSize) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
+    }
+
     public Integer getPageNo() {
         if(Objects.isNull(pageNo)){//此处不能用三目表达式，猜测利用反射获取的值不能带逻辑判断？
             return pageNo;

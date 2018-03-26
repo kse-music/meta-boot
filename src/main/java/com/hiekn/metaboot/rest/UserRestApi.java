@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Controller
 @Path("/user")
@@ -37,13 +36,6 @@ public class UserRestApi {
     @ApiOperation("获取")
     public RestResp<UserBean> get(@ApiParam(required = true)@QueryParam("id") Integer id) {
         return new RestResp<>(userService.getByPrimaryKey(id));
-    }
-
-    @GET
-    @Path("/list")
-    @ApiOperation("列表")
-    public RestResp<List<UserBean>> list() {
-        return new RestResp<>(userService.list());
     }
 
     @POST

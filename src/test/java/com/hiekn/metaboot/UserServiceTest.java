@@ -1,6 +1,8 @@
 package com.hiekn.metaboot;
 
+import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
+import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -14,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.jdbc.Sql;
-
-import java.util.List;
 
 public class UserServiceTest extends MetaBootApplicationTests{
 
@@ -46,9 +46,9 @@ public class UserServiceTest extends MetaBootApplicationTests{
     @Test
     @Sql(statements = "insert into user (id,email) values (1,'dh@gamil.com')")
     public void testSql(){
-        List<UserBean> list =  userService.list();
+        RestData<UserBean> rd =  userService.listByPage(new PageModel(1,10),null);
         boolean flag =false;
-        for (UserBean o : list) {
+        for (UserBean o : rd.getRsData()) {
             if("dh@gamil.com".equals(o.getEmail())){
                 flag = true;
                 break;
@@ -59,8 +59,8 @@ public class UserServiceTest extends MetaBootApplicationTests{
 
     @Test
     public void mongoTemplateTest(){
-        List<UserBean> list =  userService.list();
-        mongoTemplate.insert(list,"table");
+        RestData<UserBean> rd =  userService.listByPage(new PageModel(1,10),null);
+        mongoTemplate.insert(rd.getRsData(),"table");
     }
 
     @Test
