@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.hiekn.boot.web.jersey.service.BaseServiceImpl;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;

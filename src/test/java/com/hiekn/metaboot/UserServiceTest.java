@@ -1,8 +1,8 @@
 package com.hiekn.metaboot;
 
+import com.hiekn.boot.web.jersey.model.PageModel;
 import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

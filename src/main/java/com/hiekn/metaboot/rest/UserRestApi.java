@@ -1,9 +1,9 @@
 package com.hiekn.metaboot.rest;
 
+import com.hiekn.boot.web.jersey.model.PageModel;
 import com.hiekn.boot.web.jersey.result.RestData;
 import com.hiekn.boot.web.jersey.result.RestResp;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.bean.vo.PageModel;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.JsonUtils;
 import io.swagger.annotations.*;
