@@ -33,6 +33,12 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean> implements UserSe
     @Autowired
     private TokenManageService tokenManageService;
 
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+        super.setBaseMapper(userMapper);
+    }
+
     @Override
     public UserBean getByUsername(String username) {
         logger.info("请使用logger替代System.out.println！！！");
