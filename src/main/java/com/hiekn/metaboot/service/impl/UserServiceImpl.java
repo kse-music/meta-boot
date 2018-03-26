@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserBean> implements UserService {
 
     private static final Log logger = LogFactory.getLog(UserServiceImpl.class);
 
@@ -37,47 +37,47 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private TokenManageService tokenManageService;
 
-    @Override
-    public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
-        if(Objects.isNull(params)){
-            params = Maps.newHashMap();
-        }
-        params.put("pageNo",pageModel.getPageNo());
-        params.put("pageSize",pageModel.getPageSize());
-        List<UserBean> userList = userMapper.pageSelect(params);
-        logger.info("请使用logger替代System.out.println！！！");
-        return new RestData<>(userList,userMapper.pageCount(params));
-    }
-
-    @Override
-    public UserBean getByPrimaryKey(Object id) {
-        return userMapper.selectByPrimaryKey(id);
-    }
+//    @Override
+//    public RestData<UserBean> listByPage(PageModel pageModel, Map<String,Object> params) {
+//        if(Objects.isNull(params)){
+//            params = Maps.newHashMap();
+//        }
+//        params.put("pageNo",pageModel.getPageNo());
+//        params.put("pageSize",pageModel.getPageSize());
+//        List<UserBean> userList = userMapper.pageSelect(params);
+//        logger.info("请使用logger替代System.out.println！！！");
+//        return new RestData<>(userList,userMapper.pageCount(params));
+//    }
+//
+//    @Override
+//    public UserBean getByPrimaryKey(Object id) {
+//        return userMapper.selectByPrimaryKey(id);
+//    }
 
     @Override
     public UserBean getByUsername(String username) {
         return userMapper.selectByUsername(username);
     }
 
-    @Override
-    public List<UserBean> list() {
-        return userMapper.list();
-    }
-
-    @Override
-    public UserBean save(UserBean userBean) {
-        UserBean user = getByUsername(userBean.getUsername());
-        if(Objects.nonNull(user)){
-            throw ServiceException.newInstance(ErrorCodes.USER_EXIST_ERROR);
-        }
-        userMapper.insert(userBean);
-        return userBean;
-    }
-
-    @Override
-    public void deleteByPrimaryKey(Object id) {
-        userMapper.deleteByPrimaryKey(id);
-    }
+//    @Override
+//    public List<UserBean> list() {
+//        return userMapper.list();
+//    }
+//
+//    @Override
+//    public UserBean save(UserBean userBean) {
+//        UserBean user = getByUsername(userBean.getUsername());
+//        if(Objects.nonNull(user)){
+//            throw ServiceException.newInstance(ErrorCodes.USER_EXIST_ERROR);
+//        }
+//        userMapper.insert(userBean);
+//        return userBean;
+//    }
+//
+//    @Override
+//    public void deleteByPrimaryKey(Object id) {
+//        userMapper.deleteByPrimaryKey(id);
+//    }
 
 
     @Override
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
             throw ServiceException.newInstance(ErrorCodes.PARAM_PARSE_ERROR);
         }
-        UserBean user = userMapper.selectByUsername(username);
+        UserBean user = getByUsername(username);
         if(Objects.isNull(user)){
             throw ServiceException.newInstance(ErrorCodes.USER_NOT_FOUND_ERROR);
         }
