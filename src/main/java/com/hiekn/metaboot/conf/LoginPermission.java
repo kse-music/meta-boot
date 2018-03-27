@@ -1,6 +1,8 @@
 package com.hiekn.metaboot.conf;
 
 import com.hiekn.boot.web.jersey.conf.JwtToken;
+import com.hiekn.metaboot.exception.ErrorCodes;
+import com.hiekn.metaboot.exception.ServiceException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,8 +31,12 @@ public class LoginPermission {
     public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable{
         String name = pjp.getSignature().getName();
         if(!excludeMethod.contains(name)){
-            String token = jwtToken.getToken();
-            jwtToken.checkToken(token);
+            try {
+                String token = jwtToken.getToken();
+                jwtToken.checkToken(token);
+            } catch (Exception e) {
+                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
+            }
 //            Integer userId = tokenManageService.getCurrentUserId();
 //            Object token2 = redisTemplate.boundValueOps(userId).get();
 //            if (token2 == null || !token2.equals (token)) {
