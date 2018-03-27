@@ -1,12 +1,12 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.hiekn.boot.web.jersey.conf.JwtToken;
 import com.hiekn.boot.web.jersey.service.BaseServiceImpl;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
-import com.hiekn.metaboot.service.TokenManageService;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -31,7 +31,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
     private RedisTemplate redisTemplate;
 
     @Autowired
-    private TokenManageService tokenManageService;
+    private JwtToken jwtToken;
 
     @Override
     public UserBean getByUsername(String username) {
@@ -53,7 +53,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
         }
         UserLoginBean userLoginBean = new UserLoginBean();
         BeanUtils.copyProperties(user,userLoginBean);
-        String token = tokenManageService.createToken(user.getId());
+        String token = jwtToken.createToken(user.getId());
         userLoginBean.setToken(token);
         userLoginBean.setPassword(null);
         return userLoginBean;
@@ -62,7 +62,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
 
     @Override
     public void logout() {
-        redisTemplate.delete (tokenManageService.getCurrentUserId());
+        redisTemplate.delete (jwtToken.getCurrentUserId());
     }
 
 }
