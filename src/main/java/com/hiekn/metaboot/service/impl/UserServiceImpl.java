@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserBean> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implements UserService {
 
     private static final Log logger = LogFactory.getLog(UserServiceImpl.class);
 
@@ -32,12 +32,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean> implements UserSe
 
     @Autowired
     private TokenManageService tokenManageService;
-
-    @Autowired
-    public void setUserMapper(UserMapper userMapper) {
-        this.userMapper = userMapper;
-        super.setBaseMapper(userMapper);
-    }
 
     @Override
     public UserBean getByUsername(String username) {
