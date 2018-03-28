@@ -1,7 +1,7 @@
 package com.hiekn.metaboot;
 
-import com.hiekn.boot.web.jersey.model.PageModel;
-import com.hiekn.boot.web.jersey.result.RestData;
+import com.hiekn.boot.autoconfigure.base.model.PageModel;
+import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.logging.Log;

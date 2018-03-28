@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.exception;
 
 import com.google.common.collect.Lists;
-import com.hiekn.boot.web.jersey.result.RestResp;
+import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

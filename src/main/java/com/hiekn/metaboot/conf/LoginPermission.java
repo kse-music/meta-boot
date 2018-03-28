@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.conf;
 
-import com.hiekn.boot.web.jersey.conf.JwtToken;
+import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.exception.ServiceException;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.service.impl;
 
-import com.hiekn.boot.web.jersey.conf.JwtToken;
-import com.hiekn.boot.web.jersey.service.BaseServiceImpl;
+import com.hiekn.boot.autoconfigure.base.service.BaseServiceImpl;
+import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
