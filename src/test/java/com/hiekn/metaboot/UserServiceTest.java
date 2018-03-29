@@ -2,7 +2,6 @@ package com.hiekn.metaboot;
 
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
-import com.hiekn.boot.autoconfigure.base.util.MybatisGenUtil;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.logging.Log;
@@ -18,7 +17,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.jdbc.Sql;
 
-public class UserServiceTest extends MetaBootApplicationTests{
+public class UserServiceTest extends MetaBootApplicationTest {
 
     private static final Log logger = LogFactory.getLog(UserServiceTest.class);
 
