@@ -2,6 +2,7 @@ package com.hiekn.metaboot;
 
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
+import com.hiekn.boot.autoconfigure.base.util.MybatisGenUtil;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.logging.Log;
@@ -35,12 +36,13 @@ public class UserServiceTest extends MetaBootApplicationTests{
 
 	@Test
 	public void testAssert(){
-		Assert.assertSame(userService,userService);
-		Assert.assertEquals(1, 1);
-		Assert.assertTrue (2 < 3);
-		Assert.assertFalse(2 > 3);
-		Assert.assertNotNull(userService);
-		Assert.assertNull(userService);
+//        MybatisGenUtil.genMapperAndXml();
+        Assert.assertSame(userService,userService);
+        Assert.assertEquals(1, 1);
+        Assert.assertTrue (2 < 3);
+        Assert.assertFalse(2 > 3);
+        Assert.assertNotNull(userService);
+        Assert.assertNull(userService);
     }
 
     @Test
