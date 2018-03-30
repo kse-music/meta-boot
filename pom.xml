@@ -26,11 +26,13 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.hiekn.boot</groupId>
-            <artifactId>jersey2-swagger-spring-boot-starter</artifactId>
-            <version>1.4.1</version>
+            <artifactId>mcn-spring-boot-starter</artifactId>
+            <version>2.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
