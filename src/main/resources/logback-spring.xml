@@ -18,7 +18,7 @@
 
         <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>ERROR</level>
+                <level>INFO</level>
             </filter>
             <!--当天生成的日志文件名称-->
             <file>${LOG_PATH}/error.log</file>
