@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.hiekn.boot</groupId>
         <artifactId>mcn-projects</artifactId>
-        <version>2.2.3</version>
+        <version>2.3.3</version>
     </parent>
 
 
@@ -87,6 +87,18 @@
             <artifactId>mybatis-generator-core</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!--与cloud集成，请引用此包-->
+        <!--<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>-->
+        <!--开启boot应用监控，请引用此包-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>-->
+
     </dependencies>
 
 
