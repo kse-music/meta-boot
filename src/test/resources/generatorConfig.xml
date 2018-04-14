@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="application-prod.properties"/>
+    <properties resource="generator.properties"/>
     <context id="MBG" targetRuntime="MyBatis3" defaultModelType="conditional">
         <!-- 注意以下标签的顺序:property*,plugin*,commentGenerator?,jdbcConnection,
                 javaTypeResolver?,javaModelGenerator,sqlMapGenerator?,
@@ -17,7 +17,7 @@
             <property name="rootInterface" value="com.hiekn.boot.autoconfigure.base.service.BaseService"/>
             <property name="service" value="org.springframework.stereotype.Service"/>
             <property name="targetProject" value="src/main/java"/>
-            <property name="targetPackage" value="com.hiekn.metaboot.service"/>
+            <property name="targetPackage" value="${service-package}"/>
         </plugin>
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -29,17 +29,17 @@
         </commentGenerator>
         <!-- 数据库连接 -->
         <jdbcConnection
-                driverClass="${spring.datasource.driver-class-name}"
-                connectionURL="${spring.datasource.url}"
-                userId="${spring.datasource.username}"
-                password="${spring.datasource.password}">
+                driverClass="${db.driver}"
+                connectionURL="${db.url}"
+                userId="${db.user}"
+                password="${db.password}">
         </jdbcConnection>
         <!-- 指定生成的类型为java类型，避免数据库中number等类型字段 -->
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成model模型，对应的包，存放位置可以指定具体的路径,如/ProjectName/src，也可以使用MAVEN来自动生成 -->
-        <javaModelGenerator targetPackage="com.hiekn.metaboot.bean" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="${bean-package}" targetProject="src/main/java">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true"/>
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
@@ -51,7 +51,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 对应的dao接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hiekn.metaboot.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${dao-package}" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="rootInterface" value="com.hiekn.boot.autoconfigure.base.mapper.BaseMapper"/>
             <property name="repository" value="org.springframework.stereotype.Repository"/>
