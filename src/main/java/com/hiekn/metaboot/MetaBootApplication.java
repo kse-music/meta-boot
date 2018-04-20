@@ -10,5 +10,5 @@ public class MetaBootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MetaBootApplication.class, args);
-	}
+    }
 }
