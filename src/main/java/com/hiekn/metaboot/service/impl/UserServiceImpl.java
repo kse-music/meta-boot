@@ -62,7 +62,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
 
     @Override
     public void logout() {
-        redisTemplate.delete (jwtToken.getCurrentUserId());
+        redisTemplate.delete (jwtToken.getUserIdAsInt());
     }
 
 }
