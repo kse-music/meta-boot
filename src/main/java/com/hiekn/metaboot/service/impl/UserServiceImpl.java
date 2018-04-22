@@ -1,12 +1,12 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
 import com.hiekn.boot.autoconfigure.base.service.BaseServiceImpl;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
-import com.hiekn.metaboot.exception.ServiceException;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;

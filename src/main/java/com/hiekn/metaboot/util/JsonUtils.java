@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.util;
 
 import com.google.gson.Gson;
-import com.hiekn.metaboot.exception.JsonException;
+import com.hiekn.boot.autoconfigure.base.exception.JsonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 

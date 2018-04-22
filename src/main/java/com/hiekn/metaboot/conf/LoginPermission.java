@@ -1,8 +1,8 @@
 package com.hiekn.metaboot.conf;
 
+import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.metaboot.exception.ErrorCodes;
-import com.hiekn.metaboot.exception.ServiceException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
