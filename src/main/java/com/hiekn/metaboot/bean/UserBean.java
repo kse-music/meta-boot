@@ -1,12 +1,18 @@
 package com.hiekn.metaboot.bean;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 public class UserBean {
     private Integer id;
 
+    @Email
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String password;
 
     private String username;

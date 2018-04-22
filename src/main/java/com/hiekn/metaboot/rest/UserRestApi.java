@@ -4,9 +4,10 @@ package com.hiekn.metaboot.rest;
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
+import com.hiekn.boot.autoconfigure.base.util.BeanValidator;
+import com.hiekn.boot.autoconfigure.base.util.JsonUtils;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
-import com.hiekn.metaboot.util.JsonUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,7 @@ public class UserRestApi {
     @ApiOperation("新增")
     public RestResp<UserBean> add(@ApiParam(required = true)@FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
+        BeanValidator.validate(userBean);
         userService.save(userBean);
         return new RestResp<>(userBean);
     }
