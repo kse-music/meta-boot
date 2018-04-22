@@ -35,7 +35,7 @@ public class LoginPermission {
                 String token = jwtToken.getToken();
                 jwtToken.checkToken(token);
             } catch (Exception e) {
-//                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
+                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
             }
 //            Integer userId = tokenManageService.getCurrentUserId();
 //            Object token2 = redisTemplate.boundValueOps(userId).get();
