@@ -4,7 +4,6 @@ import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
 import com.hiekn.boot.autoconfigure.base.service.BaseServiceImpl;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.bean.vo.UserLoginBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
@@ -12,7 +11,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -40,7 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
     }
 
     @Override
-    public UserLoginBean login(String username, String password) {
+    public UserBean login(String username, String password) {
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
             throw ServiceException.newInstance(ErrorCodes.PARAM_PARSE_ERROR);
         }
@@ -51,12 +49,10 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
         if(!Objects.equals(DigestUtils.md5Hex(password), user.getPassword())){
             throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
         }
-        UserLoginBean userLoginBean = new UserLoginBean();
-        BeanUtils.copyProperties(user,userLoginBean);
         String token = jwtToken.createToken(user.getId());
-        userLoginBean.setToken(token);
-        userLoginBean.setPassword(null);
-        return userLoginBean;
+        user.setToken(token);
+        user.setPassword(null);
+        return user;
     }
 
 

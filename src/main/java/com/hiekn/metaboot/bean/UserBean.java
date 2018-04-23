@@ -37,6 +37,8 @@ public class UserBean {
 
     private Integer timeLimit;
 
+    private String token;
+
     public Integer getId() {
         return id;
     }
@@ -147,5 +149,13 @@ public class UserBean {
 
     public void setTimeLimit(Integer timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
