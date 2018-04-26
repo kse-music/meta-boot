@@ -31,8 +31,8 @@ public class LoginPermission {
     public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable{
         String name = pjp.getSignature().getName();
         if(!excludeMethod.contains(name)){
+            String token = jwtToken.getToken();
             try {
-                String token = jwtToken.getToken();
                 jwtToken.checkToken(token);
             } catch (Exception e) {
                 throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
