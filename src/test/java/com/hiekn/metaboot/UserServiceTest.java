@@ -10,7 +10,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -36,12 +36,12 @@ public class UserServiceTest extends MetaBootApplicationTest {
 	@Test
 	public void testAssert(){
 //        MybatisGenUtil.genMapperAndXml();
-        Assert.assertSame(userService,userService);
-        Assert.assertEquals(1, 1);
-        Assert.assertTrue (2 < 3);
-        Assert.assertFalse(2 > 3);
-        Assert.assertNotNull(userService);
-        Assert.assertNull(userService);
+        assertSame(userService,userService);
+        assertEquals(1, 1);
+        assertTrue (2 < 3);
+        assertFalse(2 > 3);
+        assertNotNull(userService);
+        assertNull(userService);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class UserServiceTest extends MetaBootApplicationTest {
                 break;
             }
         }
-        Assert.assertTrue (flag);
+        assertTrue (flag);
     }
 
     @Test
