@@ -1,74 +1,45 @@
 package com.hiekn.metaboot.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class UserBean {
-    private Integer id;
+    private String id;
 
-    @Email
-    @NotBlank
-    private String email;
-
-    @NotBlank
-    private String password;
-
-    private String username;
-
+    @Pattern(regexp="^\\d{11}$",message = "请填写正确的手机号")
     private String mobile;
 
-    private Date lastModifyTime;
+    private String nickname;
 
-    private Date lastAccessTime;
+    @NotBlank(message = "密码不能为空")
+    private String password;
 
-    private Date addTime;
+    @NotBlank
+    @Email
+    private String email;
 
-    private Integer status;
-
-    private String weixinId;
-
-    private String realname;
+    private String gender;
 
     private String company;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )
+    private Date createTime;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )
+    private Date updateTime;
 
-    private String position;
-
-    private Integer timeLimit;
+    private String status;
 
     private String token;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getMobile() {
@@ -79,52 +50,36 @@ public class UserBean {
         this.mobile = mobile == null ? null : mobile.trim();
     }
 
-    public Date getLastModifyTime() {
-        return lastModifyTime;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setLastModifyTime(Date lastModifyTime) {
-        this.lastModifyTime = lastModifyTime;
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public Date getLastAccessTime() {
-        return lastAccessTime;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastAccessTime(Date lastAccessTime) {
-        this.lastAccessTime = lastAccessTime;
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public Date getAddTime() {
-        return addTime;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getGender() {
+        return gender;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getWeixinId() {
-        return weixinId;
-    }
-
-    public void setWeixinId(String weixinId) {
-        this.weixinId = weixinId == null ? null : weixinId.trim();
-    }
-
-    public String getRealname() {
-        return realname;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname == null ? null : realname.trim();
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getCompany() {
@@ -135,20 +90,28 @@ public class UserBean {
         this.company = company == null ? null : company.trim();
     }
 
-    public String getPosition() {
-        return position;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getTimeLimit() {
-        return timeLimit;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setTimeLimit(Integer timeLimit) {
-        this.timeLimit = timeLimit;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getToken() {

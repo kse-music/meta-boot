@@ -58,11 +58,10 @@
         </javaClientGenerator>
 
         <!-- 表名对应生成的实体 -->
-        <table tableName="user" domainObjectName="UserBean" mapperName="UserMapper"
+        <table tableName="tb_user" domainObjectName="UserBean" mapperName="UserMapper"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
 

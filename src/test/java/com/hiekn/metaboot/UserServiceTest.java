@@ -35,7 +35,6 @@ public class UserServiceTest extends MetaBootApplicationTest {
 
 	@Test
 	public void testAssert(){
-//        MybatisGenUtil.genMapperAndXml();
         assertSame(userService,userService);
         assertEquals(1, 1);
         assertTrue (2 < 3);

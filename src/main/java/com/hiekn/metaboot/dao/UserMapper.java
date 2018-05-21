@@ -5,7 +5,6 @@ import com.hiekn.metaboot.bean.UserBean;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserMapper extends BaseMapper<UserBean,Integer> {
-
-    UserBean selectByUsername(String username);
+public interface UserMapper extends BaseMapper<UserBean, String> {
+    UserBean selectByCondition(UserBean userBean);
 }

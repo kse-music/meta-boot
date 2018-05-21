@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements UserService {
 
     private static final Log logger = LogFactory.getLog(UserServiceImpl.class);
 
@@ -32,17 +32,19 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
     private JwtToken jwtToken;
 
     @Override
-    public UserBean getByUsername(String username) {
-        logger.info("请使用logger替代System.out.println！！！");
-        return userMapper.selectByUsername(username);
+    public UserBean getByMobile(String mobile) {
+        logger.info("请使用logger替代System.out.println()！！！");
+        UserBean userBean = new UserBean();
+        userBean.setMobile(mobile);
+        return userMapper.selectByCondition(userBean);
     }
 
     @Override
-    public UserBean login(String username, String password) {
-        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+    public UserBean login(String mobile, String password) {
+        if(StringUtils.isBlank(mobile) || StringUtils.isBlank(password)){
             throw ServiceException.newInstance(ErrorCodes.PARAM_PARSE_ERROR);
         }
-        UserBean user = getByUsername(username);
+        UserBean user = getByMobile(mobile);
         if(Objects.isNull(user)){
             throw ServiceException.newInstance(ErrorCodes.USER_NOT_FOUND_ERROR);
         }
@@ -58,7 +60,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,Integer> implement
 
     @Override
     public void logout() {
-        redisTemplate.delete (jwtToken.getUserIdAsInt());
+        redisTemplate.delete (jwtToken.getUserIdAsString());
     }
 
 }

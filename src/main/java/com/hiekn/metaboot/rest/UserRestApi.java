@@ -1,6 +1,7 @@
 package com.hiekn.metaboot.rest;
 
 
+import com.google.common.collect.Maps;
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Map;
 
 @Controller
 @Path("/user")
@@ -29,14 +31,17 @@ public class UserRestApi {
     @GET
     @Path("/list/page")
     @ApiOperation("分页")
-    public RestResp<RestData<UserBean>> listByPage(@BeanParam PageModel pageModel) {
-        return new RestResp<>(userService.listByPage(pageModel,null));
+    public RestResp<RestData<UserBean>> listByPage(@BeanParam PageModel pageModel,
+                                                   @QueryParam("mobile")String mobile) {
+        Map<String,Object> params = Maps.newHashMap();
+        params.put("mobile",mobile);
+        return new RestResp<>(userService.listByPage(pageModel,params));
     }
 
     @GET
     @Path("/get")
     @ApiOperation("获取")
-    public RestResp<UserBean> get(@ApiParam(required = true)@QueryParam("id") Integer id) {
+    public RestResp<UserBean> get(@ApiParam(required = true)@QueryParam("id") String id) {
         return new RestResp<>(userService.getByPrimaryKey(id));
     }
 
@@ -53,9 +58,9 @@ public class UserRestApi {
     @POST
     @Path("/login")
     @ApiOperation("登录")
-    public RestResp<UserBean> login(@ApiParam(value="用户名/邮箱",required=true)@FormParam("username") String username,
+    public RestResp<UserBean> login(@ApiParam(value="手机号",required=true)@FormParam("mobile") String mobile,
                                     @ApiParam(value="密码",required=true)@FormParam("password") String password){
-        return new RestResp<>(userService.login(username,password));
+        return new RestResp<>(userService.login(mobile,password));
     }
 
     @GET
