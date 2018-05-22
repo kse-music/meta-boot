@@ -1,13 +1,11 @@
 package com.hiekn.metaboot.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 
-public class UserBean {
+public class UserBean extends BaseModel{
     private String id;
 
     @Pattern(regexp="^\\d{11}$",message = "请填写正确的手机号")
@@ -25,10 +23,6 @@ public class UserBean {
     private String gender;
 
     private String company;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )
-    private Date createTime;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8" )
-    private Date updateTime;
 
     private String status;
 
@@ -90,22 +84,6 @@ public class UserBean {
         this.company = company == null ? null : company.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -121,4 +99,5 @@ public class UserBean {
     public void setToken(String token) {
         this.token = token;
     }
+
 }
