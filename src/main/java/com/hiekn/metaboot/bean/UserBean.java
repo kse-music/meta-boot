@@ -1,11 +1,12 @@
 package com.hiekn.metaboot.bean;
 
+import com.hiekn.boot.autoconfigure.base.model.BaseModel;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Pattern;
 
-public class UserBean extends BaseModel{
+public class UserBean extends BaseModel {
     private String id;
 
     @Pattern(regexp="^\\d{11}$",message = "请填写正确的手机号")
