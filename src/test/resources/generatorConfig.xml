@@ -44,7 +44,7 @@
             <property name="enableSubPackages" value="true"/>
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
-            <!--<property name="rootClass" value="com.hiekn.boot.autoconfigure.base.model.BaseModel"/>-->
+            <property name="rootClass" value="com.hiekn.boot.autoconfigure.base.model.BaseModel"/>
         </javaModelGenerator>
         <!--对应的xml mapper文件  -->
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
