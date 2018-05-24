@@ -36,7 +36,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
         logger.info("请使用logger替代System.out.println()！！！");
         UserBean userBean = new UserBean();
         userBean.setMobile(mobile);
-        return userMapper.selectByCondition(userBean);
+        return selectByCondition(userBean);
     }
 
     @Override

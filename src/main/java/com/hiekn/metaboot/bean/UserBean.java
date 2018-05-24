@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.bean;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.hiekn.boot.autoconfigure.base.model.BaseModel;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class UserBean extends BaseModel {
 
     private String status;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String token;
 
     public String getId() {

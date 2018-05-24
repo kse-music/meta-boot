@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper extends BaseMapper<UserBean, String> {
-    UserBean selectByCondition(UserBean userBean);
 }
