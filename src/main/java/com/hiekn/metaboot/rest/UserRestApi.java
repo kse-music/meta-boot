@@ -45,6 +45,14 @@ public class UserRestApi {
         return new RestResp<>(userService.getByPrimaryKey(id));
     }
 
+    @GET
+    @Path("/delete")
+    @ApiOperation("删除")
+    public RestResp delete(@ApiParam(required = true)@QueryParam("id") String id) {
+        userService.deleteByPrimaryKey(id);
+        return new RestResp<>();
+    }
+
     @POST
     @Path("/add")
     @ApiOperation("新增")
@@ -53,6 +61,18 @@ public class UserRestApi {
         BeanValidator.validate(userBean);
         userService.save(userBean);
         return new RestResp<>(userBean);
+    }
+
+
+    @POST
+    @Path("/update")
+    @ApiOperation("修改")
+    public RestResp update(@ApiParam(required = true)@QueryParam("id") String id,
+                           @ApiParam(required = true)@FormParam("bean") String bean) {
+        UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
+        userBean.setId(id);
+        userService.updateByPrimaryKeySelective(userBean);
+        return new RestResp<>();
     }
 
     @POST
