@@ -28,7 +28,7 @@ public class LoginPermission {
 
 
     @Around("@within(org.springframework.stereotype.Controller)")
-    public Object checkLogin(ProceedingJoinPoint pjp) throws Throwable{
+    public void checkLogin(ProceedingJoinPoint pjp) throws Throwable{
         String name = pjp.getSignature().getName();
         if(!excludeMethod.contains(name)){
             String token = jwtToken.getToken();
@@ -43,7 +43,7 @@ public class LoginPermission {
 //                throw ServiceException.newInstance(ErrorCodes.AUTHENTICATION_ERROR);
 //            }
         }
-        return pjp.proceed();
+        pjp.proceed();//execute advice method
     }
 
 }
