@@ -9,7 +9,7 @@
 
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>INFO</level>
+                <level>DEBUG</level>
             </filter>
             <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                 <pattern>${pattern}</pattern>
@@ -18,7 +18,7 @@
 
         <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>INFO</level>
+                <level>DEBUG</level>
             </filter>
             <!--当天生成的日志文件名称-->
             <file>${LOG_PATH}/error.log</file>
@@ -33,13 +33,14 @@
             </encoder>
         </appender>
 
-        <root level="INFO">
+        <root level="DEBUG">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="FILE" />
         </root>
 
         <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
+        <logger name="io" level="WARN"/>
 
     </springProfile>
 
@@ -59,12 +60,9 @@
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                 <level>INFO</level>
             </filter>
-            <!--当天生成的日志文件名称-->
             <file>${LOG_PATH}/error.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <!--日志文件输出的文件名-->
                 <FileNamePattern>${LOG_PATH}/error-%d{yyyy-MM-dd}.log.gz</FileNamePattern>
-                <!--归档日志文件保留天数-->
                 <MaxHistory>30</MaxHistory>
             </rollingPolicy>
             <encoder>
@@ -79,6 +77,7 @@
 
         <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
+        <logger name="io" level="WARN"/>
 
     </springProfile>
 
@@ -88,7 +87,7 @@
 
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>ERROR</level>
+                <level>INFO</level>
             </filter>
             <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                 <pattern>${pattern}</pattern>
@@ -97,7 +96,7 @@
 
         <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>ERROR</level>
+                <level>INFO</level>
             </filter>
             <file>${LOG_PATH}/error.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -116,6 +115,7 @@
 
         <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
+        <logger name="io" level="WARN"/>
 
     </springProfile>
 

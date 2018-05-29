@@ -33,7 +33,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     @Override
     public UserBean getByMobile(String mobile) {
-        logger.info("请使用logger替代System.out.println()！！！");
+        logger.debug("请使用logger.debug替代System.out.println()！！！");
         UserBean userBean = new UserBean();
         userBean.setMobile(mobile);
         return selectByCondition(userBean);
