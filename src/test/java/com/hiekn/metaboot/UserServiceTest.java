@@ -46,7 +46,10 @@ public class UserServiceTest extends MetaBootApplicationTest {
     @Test
     @Sql(statements = "insert into user (id,email) values (1,'dh@gamil.com')")
     public void testSql(){
-        RestData<UserBean> rd =  userService.listByPage(new PageModel(1,10),null);
+        UserBean userBean = new UserBean();
+        userBean.setPageNo(1);
+        userBean.setPageSize(10);
+        RestData<UserBean> rd =  userService.listByPage(userBean);
         boolean flag =false;
         for (UserBean o : rd.getRsData()) {
             if("dh@gamil.com".equals(o.getEmail())){
@@ -59,7 +62,10 @@ public class UserServiceTest extends MetaBootApplicationTest {
 
     @Test
     public void mongoTemplateTest(){
-        RestData<UserBean> rd =  userService.listByPage(new PageModel(1,10),null);
+        UserBean userBean = new UserBean();
+        userBean.setPageNo(1);
+        userBean.setPageSize(10);
+        RestData<UserBean> rd =  userService.listByPage(userBean);
         mongoTemplate.insert(rd.getRsData(),"table");
     }
 

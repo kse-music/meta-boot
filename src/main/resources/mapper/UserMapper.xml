@@ -162,12 +162,12 @@
       </if>
     </where>
   </sql>
-  <select id="pageSelect" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="pageSelect" parameterType="com.hiekn.metaboot.bean.UserBean" resultMap="BaseResultMap">
     select * from tb_user
     <include refid="sql_where" />
      ORDER BY update_time DESC LIMIT #{pageNo},#{pageSize}
   </select>
-  <select id="pageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  <select id="pageCount" parameterType="com.hiekn.metaboot.bean.UserBean" resultType="java.lang.Integer">
     select COUNT(*) from tb_user
     <include refid="sql_where" />
   </select>

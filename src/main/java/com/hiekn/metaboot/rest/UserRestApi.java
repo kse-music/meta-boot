@@ -27,15 +27,16 @@ public class UserRestApi {
     @Autowired
     private UserService userService;
 
-
     @GET
     @Path("/list/page")
     @ApiOperation("分页")
     public RestResp<RestData<UserBean>> listByPage(@BeanParam PageModel pageModel,
                                                    @QueryParam("mobile")String mobile) {
-        Map<String,Object> params = Maps.newHashMap();
-        params.put("mobile",mobile);
-        return new RestResp<>(userService.listByPage(pageModel,params));
+        UserBean userBean = new UserBean();
+        userBean.setMobile(mobile);
+        userBean.setPageNo(pageModel.getPageNo());
+        userBean.setPageSize(pageModel.getPageSize());
+        return new RestResp<>(userService.listByPage(userBean));
     }
 
     @GET
