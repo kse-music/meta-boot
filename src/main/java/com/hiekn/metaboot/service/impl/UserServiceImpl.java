@@ -51,8 +51,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
         if(!Objects.equals(DigestUtils.md5Hex(password), user.getPassword())){
             throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
         }
-        String token = jwtToken.createToken(user.getId());
-        user.setToken(token);
+        jwtToken.createToken(user.getId());
         user.setPassword(null);
         return user;
     }
