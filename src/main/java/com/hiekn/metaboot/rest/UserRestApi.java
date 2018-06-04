@@ -1,7 +1,6 @@
 package com.hiekn.metaboot.rest;
 
 
-import com.google.common.collect.Maps;
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Map;
 
 @Controller
 @Path("/user")
