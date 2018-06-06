@@ -28,11 +28,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.hiekn.metaboot.bean.UserBean" useGeneratedKeys="true">
-    insert into tb_user (mobile, nickname, password, 
+    insert into tb_user (id,mobile, nickname, password,
       email, gender, company, 
       create_time, update_time, status
       )
-    values (#{mobile,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR},#{mobile,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{company,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}
       )
