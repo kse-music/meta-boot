@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = CheckUniqueMobileValidator.class)
+@Constraint(validatedBy = UniqueValidatorForMobile.class)
 public @interface UniqueMobile {
 
     String message() default "{com.hiekn.metaboot.validation.constraints.UniqueMobile.message}";

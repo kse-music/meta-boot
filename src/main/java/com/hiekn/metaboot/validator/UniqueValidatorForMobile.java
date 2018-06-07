@@ -7,7 +7,7 @@ import com.hiekn.metaboot.service.UserService;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckUniqueMobileValidator implements ConstraintValidator<UniqueMobile, String> {
+public class UniqueValidatorForMobile implements ConstraintValidator<UniqueMobile, String> {
 
     public void initialize(UniqueMobile constraintAnnotation) {
     }
