@@ -75,7 +75,6 @@
             <appender-ref ref="FILE" />
         </root>
 
-        <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
         <logger name="io" level="WARN"/>
 
@@ -112,7 +111,6 @@
             <appender-ref ref="FILE" />
         </root>
 
-        <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
         <logger name="io" level="WARN"/>
 
@@ -150,7 +148,6 @@
             <appender-ref ref="FILE" />
         </root>
 
-        <!-- 设置第三方日志系统级别 -->
         <logger name="org" level="WARN"/>
         <logger name="io" level="WARN"/>
 
