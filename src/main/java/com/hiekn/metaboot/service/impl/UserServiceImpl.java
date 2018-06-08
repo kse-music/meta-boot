@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -36,7 +37,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
         logger.debug("请使用logger.debug替代System.out.println()！！！");
         UserBean userBean = new UserBean();
         userBean.setMobile(mobile);
-        return selectByCondition(userBean);
+        List<UserBean> list = selectByCondition(userBean);
+        return list != null && !list.isEmpty() ? list.get(0):null;
     }
 
     @Override

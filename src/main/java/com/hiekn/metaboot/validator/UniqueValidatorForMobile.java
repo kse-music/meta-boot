@@ -6,6 +6,7 @@ import com.hiekn.metaboot.service.UserService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.List;
 
 public class UniqueValidatorForMobile implements ConstraintValidator<UniqueMobile, String> {
 
@@ -19,8 +20,8 @@ public class UniqueValidatorForMobile implements ConstraintValidator<UniqueMobil
         UserService userService = BeanUtils.getBean(UserService.class);
         UserBean userBean = new UserBean();
         userBean.setMobile(value);
-        UserBean bean = userService.selectByCondition(userBean);
-        return bean == null;
+        List<UserBean> list = userService.selectByCondition(userBean);
+        return list == null || list.isEmpty();
     }
 }
 
