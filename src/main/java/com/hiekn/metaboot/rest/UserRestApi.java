@@ -12,6 +12,7 @@ import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +29,7 @@ public class UserRestApi {
     @GET
     @Path("/list/page")
     @ApiOperation("分页")
-    public RestResp<RestData<UserBean>> listByPage(@BeanParam PageModel pageModel,
+    public RestResp<RestData<UserBean>> listByPage(@Valid @BeanParam PageModel pageModel,
                                                    @QueryParam("mobile")String mobile) {
         UserBean userBean = new UserBean();
         userBean.setMobile(mobile);
