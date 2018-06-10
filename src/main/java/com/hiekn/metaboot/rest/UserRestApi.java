@@ -32,9 +32,9 @@ public class UserRestApi {
     public RestResp<RestData<UserBean>> listByPage(@Valid @BeanParam PageModel pageModel,
                                                    @QueryParam("mobile")String mobile) {
         UserBean userBean = new UserBean();
-        userBean.setMobile(mobile);
         userBean.setPageNo(pageModel.getPageNo());
         userBean.setPageSize(pageModel.getPageSize());
+        userBean.setMobile(mobile);
         return new RestResp<>(userService.listByPage(userBean));
     }
 
