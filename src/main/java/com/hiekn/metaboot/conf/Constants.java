@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:prop/meta-${spring.profiles.active}.properties")
+@PropertySource("${custom.property.path}")
 @ConfigurationProperties
 public class Constants {
 
