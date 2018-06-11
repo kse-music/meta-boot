@@ -122,7 +122,7 @@
 
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>INFO</level>
+                <level>ERROR</level>
             </filter>
             <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
                 <pattern>${pattern}</pattern>
@@ -131,7 +131,7 @@
 
         <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-                <level>INFO</level>
+                <level>ERROR</level>
             </filter>
             <file>${LOG_PATH}/error.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
