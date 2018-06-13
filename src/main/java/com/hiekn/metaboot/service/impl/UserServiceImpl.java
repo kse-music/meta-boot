@@ -48,7 +48,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
         }
         UserBean user = getByMobile(mobile);
         if(Objects.isNull(user)){
-            throw ServiceException.newInstance(ErrorCodes.USER_NOT_FOUND_ERROR);
+            throw ServiceException.newInstance(ErrorCodes.NOT_FOUND_ERROR);
         }
         if(!Objects.equals(DigestUtils.md5Hex(password), user.getPassword())){
             throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
