@@ -1,6 +1,5 @@
 package com.hiekn.metaboot.rest;
 
-
 import com.hiekn.boot.autoconfigure.base.model.PageModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
