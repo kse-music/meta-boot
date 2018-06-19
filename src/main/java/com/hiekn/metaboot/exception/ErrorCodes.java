@@ -8,7 +8,8 @@ import com.hiekn.boot.autoconfigure.base.exception.ExceptionKeys;
     8xxxx:Http相关错误码定义
     9xxxx:统一错误码及第三方服务错误码定义
  */
-public interface ErrorCodes extends ExceptionKeys {
+public class ErrorCodes implements ExceptionKeys {
 
-    Integer INIT_INTENT_ERROR = 50003;
+    public static final int INIT_INTENT_ERROR = 50001;
+
 }
