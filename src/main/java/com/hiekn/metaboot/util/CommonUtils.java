@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.UUID;
 
 public final class CommonUtils {
+
+    private CommonUtils(){}
 	
 	public static String getRandomUUID(){
 		return UUID.randomUUID().toString().replace("-", "");

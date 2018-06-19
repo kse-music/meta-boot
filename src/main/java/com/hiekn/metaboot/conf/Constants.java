@@ -9,6 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties
 public class Constants {
 
+    private Constants(){}
+
     public static final String VAR = "常量";
 
 }

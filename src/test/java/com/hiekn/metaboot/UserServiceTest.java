@@ -36,7 +36,6 @@ public class UserServiceTest extends MetaBootApplicationTest {
 	@Test
 	public void testAssert(){
         assertSame(userService,userService);
-        assertEquals(1, 1);
         assertTrue (2 < 3);
         assertFalse(2 > 3);
         assertNotNull(userService);

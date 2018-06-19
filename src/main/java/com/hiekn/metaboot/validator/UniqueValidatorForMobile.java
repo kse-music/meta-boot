@@ -11,6 +11,7 @@ import java.util.List;
 public class UniqueValidatorForMobile implements ConstraintValidator<UniqueMobile, String> {
 
     public void initialize(UniqueMobile constraintAnnotation) {
+        constraintAnnotation.message();
     }
 
     public boolean isValid(String value, ConstraintValidatorContext context) {
