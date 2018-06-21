@@ -62,7 +62,6 @@ public class UserRestApi {
         return new RestResp<>(userBean);
     }
 
-
     @POST
     @Path("/update")
     @ApiOperation("修改")
