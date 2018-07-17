@@ -45,7 +45,7 @@ public class UserRestApi {
     }
 
     @DELETE
-    @Path("{id}/remove")
+    @Path("{id}")
     @ApiOperation("删除")
     public RestResp delete(@PathParam("id") String id) {
         userService.deleteByPrimaryKey(id);
@@ -63,10 +63,9 @@ public class UserRestApi {
     }
 
     @PUT
-    @Path("{id}/update")
+    @Path("{id}")
     @ApiOperation("修改")
-    public RestResp update(@PathParam("id") String id,
-                           @ApiParam(required = true)@FormParam("bean") String bean) {
+    public RestResp update(@PathParam("id") String id, @ApiParam(required = true)@FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         userBean.setId(id);
         userService.updateByPrimaryKeySelective(userBean);
