@@ -78,7 +78,8 @@ public class UserRestApi {
     @ApiOperation("登录")
     public RestResp<UserBean> login(@ApiParam(value="手机号",required=true)@FormParam("mobile") String mobile,
                                     @ApiParam(value="密码",required=true)@FormParam("password") String password){
-        return new RestResp<>(userService.login(mobile,password));
+        userService.login(mobile,password);
+        return new RestResp<>();
     }
 
     @POST
