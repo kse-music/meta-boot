@@ -53,7 +53,7 @@ public class UserRestApi {
     }
 
     @POST
-    @Path("/add")
+    @Path("add")
     @ApiOperation("新增")
     public RestResp<UserBean> add(@ApiParam(required = true)@FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
