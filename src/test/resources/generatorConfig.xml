@@ -18,6 +18,7 @@
             <property name="service" value="org.springframework.stereotype.Service"/>
             <property name="targetProject" value="src/main/java"/>
             <property name="targetPackage" value="${service-package}"/>
+            <property name="overwrite" value="${overwrite}"/>
         </plugin>
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
