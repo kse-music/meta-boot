@@ -40,6 +40,9 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.hiekn.metaboot.bean.UserBean" useGeneratedKeys="true">
     insert into tb_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+          id,
+      </if>
       <if test="mobile != null">
         mobile,
       </if>
@@ -69,6 +72,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
       <if test="mobile != null">
         #{mobile,jdbcType=VARCHAR},
       </if>

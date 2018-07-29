@@ -7,12 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.TYPE,ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueValidatorForMobile.class)
-public @interface UniqueMobile {
+@Constraint(validatedBy = ValidatorForUserBean.class)
+public @interface UserBeanValidator {
 
-    String message() default "{com.hiekn.metaboot.validation.constraints.UniqueMobile.message}";
+    String message() default "存在不合法的参数";
 
     Class<?>[] groups() default {};
 

@@ -1,17 +1,14 @@
 package com.hiekn.metaboot.bean;
 
 import com.hiekn.boot.autoconfigure.base.model.BaseModel;
-import com.hiekn.metaboot.validator.UniqueMobile;
+import com.hiekn.metaboot.validator.UserBeanValidator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Pattern;
-
+@UserBeanValidator
 public class UserBean extends BaseModel {
     private String id;
 
-    @Pattern(regexp="^\\d{11}$",message = "请填写正确的手机号")
-    @UniqueMobile
     private String mobile;
 
     private String nickname;
