@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.rest;
 
-import com.hiekn.boot.autoconfigure.base.model.PageModel;
+import com.hiekn.boot.autoconfigure.base.model.BaseModel;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
 import com.hiekn.boot.autoconfigure.base.util.BeanValidator;
@@ -30,11 +30,11 @@ public class UserRestApi {
     @GET
     @Path("list/page")
     @ApiOperation("分页")
-    public RestResp<RestData<UserBean>> listByPage(@Valid @BeanParam PageModel pageModel,
+    public RestResp<RestData<UserBean>> listByPage(@Valid @BeanParam BaseModel baseModel,
                                                    @QueryParam("mobile")String mobile) {
         UserBean userBean = new UserBean();
-        userBean.setPageNo(pageModel.getPageNo());
-        userBean.setPageSize(pageModel.getPageSize());
+        userBean.setPageNo(baseModel.getPageNo());
+        userBean.setPageSize(baseModel.getPageSize());
         userBean.setMobile(mobile);
         return new RestResp<>(userService.listByPage(userBean));
     }
