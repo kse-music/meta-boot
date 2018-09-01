@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: meta-boot
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/meta_boot?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false
+    username: root
+    password: root
+  redis:
+    host: 127.0.0.1
+  data:
+    mongodb:
+      host: 127.0.0.1
+      database: db
+server:
+  port: 8888
+custom:
+  property:
+    path: classpath:prop/meta-${spring.profiles.active}.properties
+elasticsearch:
+  host: 127.0.0.1:9300
+  cluster-name: docker-es
+jwt:
+  security:
+    login: true
+    ignore-urls: user/login
+logging:
+  level:
+    root: error
+jersey:
+  swagger:
+    init: false
+filter:
+  cross: false
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:9000/eureka/
+#  instance:
+#    prefer-ip-address: true
+#management:
+#  security:
+#    enabled: false
