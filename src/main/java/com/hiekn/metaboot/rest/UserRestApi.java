@@ -7,6 +7,7 @@ import com.hiekn.boot.autoconfigure.base.util.BeanValidator;
 import com.hiekn.boot.autoconfigure.base.util.JsonUtils;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
+import com.hiekn.metaboot.util.CommonUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Controller
 @Path("user")
@@ -26,15 +28,21 @@ public class UserRestApi {
     private UserService userService;
 
     @GET
-    @Path("list/page")
+    @Path("page")
     @ApiOperation("分页")
-    public RestResp<RestData<UserBean>> listByPage(@Valid @BeanParam PageModel pageModel,
+    public RestResp<RestData<UserBean>> listPage(@Valid @BeanParam PageModel pageModel,
                                                    @QueryParam("mobile")String mobile) {
         UserBean userBean = new UserBean();
         userBean.setPageNo(pageModel.getPageNo());
         userBean.setPageSize(pageModel.getPageSize());
         userBean.setMobile(mobile);
         return new RestResp<>(userService.listByPage(userBean));
+    }
+
+    @GET
+    @ApiOperation("列表")
+    public RestResp<List<UserBean>> list() {
+        return new RestResp<>(userService.selectByCondition(null));
     }
 
     @GET
@@ -53,11 +61,11 @@ public class UserRestApi {
     }
 
     @POST
-    @Path("add")
     @ApiOperation("新增")
     public RestResp<UserBean> add(@ApiParam(required = true)@FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         BeanValidator.validate(userBean);
+        userBean.setId(CommonUtils.getRandomUUID());
         userService.saveSelective(userBean);
         return new RestResp<>(userBean);
     }

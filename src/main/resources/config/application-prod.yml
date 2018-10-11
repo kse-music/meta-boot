@@ -22,7 +22,7 @@ elasticsearch:
 jwt:
   security:
     login: true
-    ignore-urls: user/login
+    ignore-urls: login
 logging:
   level:
     root: error

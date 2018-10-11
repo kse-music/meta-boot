@@ -18,6 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Controller
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 @Api("登陆模块")
 public class LoginRestApi {
