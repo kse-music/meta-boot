@@ -17,7 +17,7 @@ custom:
   property:
     path: classpath:prop/meta-${spring.profiles.active}.properties
 elasticsearch:
-  host: 192.168.1.159:9300
+  host: 192.168.1.159:9200
   cluster-name: docker-es
 jwt:
   security:
