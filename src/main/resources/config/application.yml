@@ -24,7 +24,7 @@ elasticsearch:
 jwt:
   security:
     login: true
-    ignore-urls: login,logout
+    ignore-urls: login
 #服务注册地址
 #eureka:
 #  client:
