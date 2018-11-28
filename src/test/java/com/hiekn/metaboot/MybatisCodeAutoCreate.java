@@ -1,5 +1,6 @@
 package com.hiekn.metaboot;
 
+
 import com.hiekn.boot.autoconfigure.base.util.MybatisGenUtil;
 
 public class MybatisCodeAutoCreate {

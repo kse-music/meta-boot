@@ -3,8 +3,6 @@ package com.hiekn.metaboot;
 import com.hiekn.boot.autoconfigure.base.model.result.RestData;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -25,8 +23,6 @@ import static org.junit.Assert.*;
 
 public class UserServiceTest extends MetaBootApplicationTest {
 
-    private static final Log logger = LogFactory.getLog(UserServiceTest.class);
-
     @Autowired
 	private UserService userService;
 
@@ -37,7 +33,7 @@ public class UserServiceTest extends MetaBootApplicationTest {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private RestHighLevelClient client;
+    private RestHighLevelClient restHighLevelClient;
 
 	@Test
 	public void testAssert(){
@@ -84,7 +80,7 @@ public class UserServiceTest extends MetaBootApplicationTest {
         SearchRequest searchRequest = new SearchRequest("boot").types("log");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(QueryBuilders.termQuery("title", "0")).timeout(new TimeValue(60, TimeUnit.SECONDS));
         searchRequest.source(sourceBuilder);
-        SearchResponse response = client.search(searchRequest,RequestOptions.DEFAULT);
+        SearchResponse response = restHighLevelClient.search(searchRequest,RequestOptions.DEFAULT);
         response.getHits().forEach(hit -> logger.info(hit.getSourceAsMap()));
 
     }
