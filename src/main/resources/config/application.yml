@@ -4,7 +4,7 @@ spring:
   profiles:
     active: local
   datasource:
-    url: jdbc:mysql://192.168.1.159:3306/meta_boot?characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://192.168.1.159:3306/meta_boot?characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
     username: root
     password: root
   redis:

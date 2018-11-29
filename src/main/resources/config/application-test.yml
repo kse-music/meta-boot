@@ -2,7 +2,7 @@ spring:
   application:
     name: meta-boot
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/meta_boot?characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://127.0.0.1:3306/meta_boot?characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
     username: root
     password: root
   redis:

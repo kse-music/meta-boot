@@ -169,16 +169,20 @@
     </where>
   </sql>
   <select id="pageSelect" parameterType="com.hiekn.metaboot.bean.UserBean" resultMap="BaseResultMap">
-    select * from tb_user
-    <include refid="sql_where" />
+    select
+      <include refid="Base_Column_List" />
+     from tb_user
+     <include refid="sql_where" />
      ORDER BY update_time DESC LIMIT #{pageNo},#{pageSize}
   </select>
   <select id="pageCount" parameterType="com.hiekn.metaboot.bean.UserBean" resultType="java.lang.Integer">
-    select COUNT(*) from tb_user
+    select COUNT(1) from tb_user
     <include refid="sql_where" />
   </select>
   <select id="selectByCondition" parameterType="com.hiekn.metaboot.bean.UserBean" resultMap="BaseResultMap">
-    select * from tb_user
+    select
+      <include refid="Base_Column_List" />
+    from tb_user
     <include refid="sql_where" />
   </select>
 
