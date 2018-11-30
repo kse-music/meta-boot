@@ -38,7 +38,7 @@ public class LoginRestApi {
     @POST
     @Path("logout")
     @ApiOperation("登出")
-    public RestResp<Object> logout(){
+    public RestResp logout(){
         userService.logout();
         return new RestResp<>();
     }

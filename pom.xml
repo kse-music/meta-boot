@@ -78,11 +78,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
         </dependency>
@@ -113,7 +108,9 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -125,7 +122,9 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
+
         </plugins>
+
     </build>
 
 </project>
