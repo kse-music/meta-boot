@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.validator;
 
-import com.hiekn.boot.autoconfigure.base.util.BeanUtils;
+import com.hiekn.boot.autoconfigure.base.util.SpringBeanUtils;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 
@@ -23,7 +23,7 @@ public class ValidatorForUserBean implements ConstraintValidator<UserBeanValidat
                 sendErrMsg(context,"请填写正确的手机号");
                 return false;
             }
-            UserService userService = BeanUtils.getBean(UserService.class);
+            UserService userService = SpringBeanUtils.getBean(UserService.class);
             UserBean bean = userService.getByMobile(value.getMobile());
             if(Objects.nonNull(bean)){
                 sendErrMsg(context,"手机号已存在");

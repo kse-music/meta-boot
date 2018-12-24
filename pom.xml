@@ -6,7 +6,6 @@
 	<groupId>com.hiekn</groupId>
 	<artifactId>meta-boot</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
 
 	<name>meta-boot</name>
 	<description>meta-boot project for Spring Boot</description>
@@ -14,7 +13,7 @@
     <parent>
         <groupId>com.hiekn.boot</groupId>
         <artifactId>mcn-projects</artifactId>
-        <version>1.5.18</version>
+        <version>1.5.19</version>
     </parent>
 
     <properties>
@@ -81,11 +80,6 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.generator</groupId>
-            <artifactId>mybatis-generator-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
         <!--与cloud集成，请引用此包-->
         <!--<dependency>
@@ -121,6 +115,36 @@
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.hiekn.generator</groupId>
+                <artifactId>mcn-maven-plugin</artifactId>
+                <configuration>
+                    <propConfig>
+                        <property>
+                            <name>db.driver</name>
+                            <value>com.mysql.jdbc.Driver</value>
+                        </property>
+                        <property>
+                            <name>db.url</name>
+                            <value>jdbc:mysql://192.168.1.7:3306/mjcms?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;useSSL=false</value>
+                        </property>
+                        <property>
+                            <name>db.user</name>
+                            <value>root</value>
+                        </property>
+                        <property>
+                            <name>db.password</name>
+                            <value>root@hiekn</value>
+                        </property>
+                        <property>
+                            <name>basePkg</name>
+                            <value>com.hiekn.metaboot</value>
+                        </property>
+                    </propConfig>
+                </configuration>
+
             </plugin>
 
         </plugins>
