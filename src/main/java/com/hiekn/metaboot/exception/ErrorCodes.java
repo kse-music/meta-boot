@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.exception;
 
-import com.hiekn.boot.autoconfigure.base.exception.ExceptionKeys;
+import com.hiekn.boot.autoconfigure.base.exception.handler.ErrorMsg;
 
 /*
     3xxxx:通用错误码定义
@@ -9,7 +9,7 @@ import com.hiekn.boot.autoconfigure.base.exception.ExceptionKeys;
     8xxxx:Http相关错误码定义
     9xxxx:统一错误码及第三方服务错误码定义
  */
-public final class ErrorCodes implements ExceptionKeys {
+public final class ErrorCodes extends ErrorMsg {
 
     private ErrorCodes(){}
 
