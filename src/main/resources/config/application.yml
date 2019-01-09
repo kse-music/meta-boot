@@ -15,7 +15,7 @@ server:
   port: 8888
 custom:
   property:
-    path: classpath:prop/meta-${spring.profiles.active}.properties
+    path: classpath:config/meta.properties
 elasticsearch:
   host: 192.168.1.159:9200
   cluster-name: docker-es
