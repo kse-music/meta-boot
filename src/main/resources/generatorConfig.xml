@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="generator.properties"/>
+
     <context id="MBG" targetRuntime="MyBatis3" defaultModelType="conditional">
         <!-- 注意以下标签的顺序:property*,plugin*,commentGenerator?,jdbcConnection,
                 javaTypeResolver?,javaModelGenerator,sqlMapGenerator?,
