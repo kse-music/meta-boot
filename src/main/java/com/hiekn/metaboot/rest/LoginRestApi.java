@@ -1,6 +1,7 @@
 package com.hiekn.metaboot.rest;
 
 import com.hiekn.boot.autoconfigure.base.model.result.RestResp;
+import com.hiekn.boot.autoconfigure.jersey.IgnoreAuth;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import io.swagger.annotations.Api;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 @Api("登陆模块")
+@IgnoreAuth
 public class LoginRestApi {
 
     @Autowired
