@@ -21,7 +21,6 @@ import java.util.List;
 @Path("user")
 @Produces(MediaType.APPLICATION_JSON)
 @Api("用户模块")
-@ApiImplicitParams({@ApiImplicitParam(paramType = "header", dataType = "string", name = "Authorization",required = true)})
 public class UserRestApi {
 
     @Autowired
