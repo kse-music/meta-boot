@@ -6,13 +6,16 @@ import com.hiekn.boot.autoconfigure.base.util.JsonUtils;
 import com.hiekn.boot.autoconfigure.web.model.PageModel;
 import com.hiekn.boot.autoconfigure.web.util.BeanValidator;
 import com.hiekn.metaboot.bean.UserBean;
+import com.hiekn.metaboot.conf.aop.CheckData;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.CommonUtils;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -30,7 +33,7 @@ public class UserRestApi {
     @Path("page")
     @ApiOperation("分页")
     public RestResp<RestData<UserBean>> listPage(@Valid @BeanParam PageModel pageModel,
-                                                   @QueryParam("mobile")String mobile) {
+                                                 @QueryParam("mobile")String mobile) {
         UserBean userBean = new UserBean();
         userBean.setPageNo(pageModel.getPageNo());
         userBean.setPageSize(pageModel.getPageSize());
@@ -46,6 +49,7 @@ public class UserRestApi {
 
     @GET
     @Path("{id}")
+    @CheckData
     @ApiOperation("获取")
     public RestResp<UserBean> get(@PathParam("id") String id) {
         return new RestResp<>(userService.getByPrimaryKey(id));
@@ -53,6 +57,7 @@ public class UserRestApi {
 
     @DELETE
     @Path("{id}")
+    @CheckData
     @ApiOperation("删除")
     public RestResp delete(@PathParam("id") String id) {
         userService.deleteByPrimaryKey(id);
@@ -61,7 +66,7 @@ public class UserRestApi {
 
     @POST
     @ApiOperation("新增")
-    public RestResp<UserBean> add(@ApiParam(required = true)@FormParam("bean") String bean) {
+    public RestResp<UserBean> add(@NotNull @FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         BeanValidator.validate(userBean);
         userBean.setId(CommonUtils.getRandomUUID());
@@ -71,8 +76,10 @@ public class UserRestApi {
 
     @PUT
     @Path("{id}")
+    @CheckData
     @ApiOperation("修改")
-    public RestResp update(@PathParam("id") String id, @ApiParam(required = true)@FormParam("bean") String bean) {
+    public RestResp update(@PathParam("id") String id,
+                           @NotNull @FormParam("bean") String bean) {
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         userBean.setId(id);
         userService.updateByPrimaryKeySelective(userBean);

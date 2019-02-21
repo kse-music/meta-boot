@@ -8,9 +8,8 @@ import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements UserService {
 
-    private static final Log logger = LogFactory.getLog(UserServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -43,9 +42,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     @Override
     public UserBean login(String mobile, String password) {
-        if(StringUtils.isBlank(mobile) || StringUtils.isBlank(password)){
-            throw ServiceException.newInstance(ErrorCodes.PARAM_PARSE_ERROR);
-        }
         UserBean user = getByMobile(mobile);
         if(Objects.isNull(user)){
             throw ServiceException.newInstance(ErrorCodes.NOT_FOUND_ERROR);
@@ -61,7 +57,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     @Override
     public void logout() {
-        redisTemplate.delete (jwtToken.getUserIdAsString());
+        redisTemplate.delete(jwtToken.getUserIdAsString());
     }
 
 }
