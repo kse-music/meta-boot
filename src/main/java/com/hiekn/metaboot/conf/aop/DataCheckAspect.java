@@ -27,7 +27,7 @@ public class DataCheckAspect {
     @Autowired
     private JwtToken jwtToken;
 
-    @Around("execution(* com.hiekn.metaboot.rest.*.*(..)) && @annotation(com.hiekn.metaboot.conf.aop.CheckData)")
+    @Around("execution(* com.hiekn.metaboot.rest.UserRestApi.*(..)) && @annotation(com.hiekn.metaboot.conf.aop.CheckData)")
     public Object log(ProceedingJoinPoint p) throws Throwable{
         Object[] args = p.getArgs();
         UserBean userBean = userService.getByPrimaryKey((String) args[0]);
