@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.service.impl;
 
+import com.hiekn.boot.autoconfigure.base.exception.RestException;
 import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
 import com.hiekn.boot.autoconfigure.base.service.BaseServiceImpl;
 import com.hiekn.boot.autoconfigure.jwt.JwtToken;
@@ -30,6 +31,18 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     @Autowired
     private JwtToken jwtToken;
+
+    /**
+     * 修改、删除、详情，需把资源的主ID作为查询参数
+     * 此处校验查出的数据是否为自己的，省去了sql中带userId查询
+     */
+    @Override
+    public void assertSelfData(String id) {
+        UserBean userBean = getByPrimaryKey(id);
+        if(Objects.nonNull(userBean) && !userBean.getId().equals(jwtToken.getUserIdAsString())){
+            throw RestException.newInstance(ErrorCodes.UNKNOWN_ERROR);
+        }
+    }
 
     @Override
     public UserBean getByMobile(String mobile) {

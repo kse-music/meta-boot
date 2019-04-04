@@ -6,7 +6,6 @@ import com.hiekn.boot.autoconfigure.base.util.JsonUtils;
 import com.hiekn.boot.autoconfigure.web.model.PageModel;
 import com.hiekn.boot.autoconfigure.web.util.BeanValidator;
 import com.hiekn.metaboot.bean.UserBean;
-import com.hiekn.metaboot.conf.aop.CheckData;
 import com.hiekn.metaboot.service.UserService;
 import com.hiekn.metaboot.util.CommonUtils;
 import io.swagger.annotations.Api;
@@ -49,17 +48,17 @@ public class UserRestApi {
 
     @GET
     @Path("{id}")
-    @CheckData
     @ApiOperation("获取")
     public RestResp<UserBean> get(@PathParam("id") String id) {
+        userService.assertSelfData(id);
         return new RestResp<>(userService.getByPrimaryKey(id));
     }
 
     @DELETE
     @Path("{id}")
-    @CheckData
     @ApiOperation("删除")
     public RestResp delete(@PathParam("id") String id) {
+        userService.assertSelfData(id);
         userService.deleteByPrimaryKey(id);
         return new RestResp<>();
     }
@@ -76,10 +75,10 @@ public class UserRestApi {
 
     @PUT
     @Path("{id}")
-    @CheckData
     @ApiOperation("修改")
     public RestResp update(@PathParam("id") String id,
                            @NotNull @FormParam("bean") String bean) {
+        userService.assertSelfData(id);
         UserBean userBean = JsonUtils.fromJson(bean, UserBean.class);
         userBean.setId(id);
         userService.updateByPrimaryKeySelective(userBean);
