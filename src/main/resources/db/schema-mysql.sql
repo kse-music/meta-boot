@@ -1,5 +1,3 @@
-CREATE DATABASE meta_boot;
-
 CREATE TABLE `tb_user` (
   `id` varchar(32) NOT NULL,
   `mobile` varchar(32) DEFAULT NULL,
