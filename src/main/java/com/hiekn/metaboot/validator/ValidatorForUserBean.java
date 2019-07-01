@@ -17,7 +17,6 @@ public class ValidatorForUserBean implements ConstraintValidator<UserBeanValidat
 
     public boolean isValid(UserBean value, ConstraintValidatorContext context) {
         if(Objects.nonNull(value)){
-            context.disableDefaultConstraintViolation();
             String pattern = "^\\d{11}$";
             if (Objects.isNull(value.getMobile()) || !Pattern.matches(pattern, value.getMobile())) {
                 sendErrMsg(context,"请填写正确的手机号");

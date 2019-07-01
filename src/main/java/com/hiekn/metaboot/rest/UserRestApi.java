@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Controller
-@Path("user")
+@Path("users")
 @Produces(MediaType.APPLICATION_JSON)
 @Api("用户模块")
 public class UserRestApi {
