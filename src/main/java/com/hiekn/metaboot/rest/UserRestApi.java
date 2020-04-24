@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "users",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "users",produces = MediaType.APPLICATION_JSON_VALUE)
 @Api("用户模块")
 public class UserRestApi {
 
