@@ -1,19 +1,27 @@
 package com.hiekn.metaboot.bean;
 
-import com.hiekn.boot.autoconfigure.base.model.BaseModel;
+import cn.hiboot.mcn.core.model.BaseModel;
 import com.hiekn.metaboot.validator.UserBeanValidator;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
+import com.hiekn.metaboot.validator.group.Insert;
+import com.hiekn.metaboot.validator.group.Update;
+
+import javax.validation.GroupSequence;
+import javax.validation.constraints.*;
 
 @UserBeanValidator
+@GroupSequence({Insert.class,UserBean.class})
 public class UserBean extends BaseModel {
+
+    @NotEmpty(groups = Update.class)
     private String id;
 
+    @Pattern(regexp = "^\\d{11}$",message = "请填写正确的手机号",groups = Insert.class)
+    @NotEmpty(groups = Insert.class)
     private String mobile;
 
     private String nickname;
 
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空",groups = Insert.class)
     private String password;
 
     @Email

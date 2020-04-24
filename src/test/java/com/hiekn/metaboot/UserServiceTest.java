@@ -1,13 +1,14 @@
 package com.hiekn.metaboot;
 
-import com.hiekn.boot.autoconfigure.base.model.result.RestData;
+import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.jdbc.Sql;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -18,10 +19,6 @@ public class UserServiceTest extends MetaBootApplicationTest {
 
     @Autowired
     private MongoTemplate mongoTemplate;
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
 
 	@Test
 	public void testAssert(){
@@ -38,9 +35,9 @@ public class UserServiceTest extends MetaBootApplicationTest {
         UserBean userBean = new UserBean();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestData<UserBean> rd =  userService.listByPage(userBean);
+        RestResp<List<UserBean>> rd =  userService.listPage(userBean);
         boolean flag =false;
-        for (UserBean o : rd.getRsData()) {
+        for (UserBean o : rd.getData()) {
             if("dh@gamil.com".equals(o.getEmail())){
                 flag = true;
                 break;
@@ -54,13 +51,13 @@ public class UserServiceTest extends MetaBootApplicationTest {
         UserBean userBean = new UserBean();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestData<UserBean> rd =  userService.listByPage(userBean);
-        mongoTemplate.insert(rd.getRsData(),"table");
+        RestResp<List<UserBean>> rd =  userService.listPage(userBean);
+        mongoTemplate.insert(rd.getData(),"table");
     }
 
     @Test
     public void redisTemplateTest(){
-        stringRedisTemplate.opsForValue().set("key","value");
+//        stringRedisTemplate.opsForValue().set("key","value");
     }
 
 }

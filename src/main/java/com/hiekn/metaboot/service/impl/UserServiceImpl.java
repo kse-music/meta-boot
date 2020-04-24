@@ -1,19 +1,17 @@
 package com.hiekn.metaboot.service.impl;
 
-import com.hiekn.boot.autoconfigure.base.exception.RestException;
-import com.hiekn.boot.autoconfigure.base.exception.ServiceException;
-import com.hiekn.boot.autoconfigure.base.service.BaseServiceImpl;
-import com.hiekn.boot.autoconfigure.jwt.JwtToken;
+import cn.hiboot.mcn.core.exception.RestException;
+import cn.hiboot.mcn.core.exception.ServiceException;
+import cn.hiboot.mcn.core.service.BaseServiceImpl;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -26,12 +24,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
-    @Autowired
-    private JwtToken jwtToken;
-
     /**
      * 修改、删除、详情，需把资源的主ID作为查询参数
      * 此处校验查出的数据是否为自己的，省去了sql中带userId查询
@@ -39,7 +31,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
     @Override
     public void assertSelfData(String id) {
         UserBean userBean = getByPrimaryKey(id);
-        if(Objects.nonNull(userBean) && !userBean.getId().equals(jwtToken.getUserIdAsString())){
+        if(Objects.nonNull(userBean)){
             throw RestException.newInstance(ErrorCodes.UNKNOWN_ERROR);
         }
     }
@@ -59,10 +51,9 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
         if(Objects.isNull(user)){
             throw ServiceException.newInstance(ErrorCodes.NOT_FOUND_ERROR);
         }
-        if(!Objects.equals(DigestUtils.md5Hex(password), user.getPassword())){
+        if(!Objects.equals(DigestUtils.md5Digest(password.getBytes()), user.getPassword())){
             throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
         }
-        jwtToken.createToken(user.getId());
         user.setPassword(null);
         return user;
     }
@@ -70,7 +61,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     @Override
     public void logout() {
-        redisTemplate.delete(jwtToken.getUserIdAsString());
+
     }
 
 }

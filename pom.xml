@@ -11,9 +11,9 @@
 	<description>meta-boot project for Spring Boot</description>
 
     <parent>
-        <groupId>com.hiekn.boot</groupId>
-        <artifactId>mcn-projects</artifactId>
-        <version>1.5.18</version>
+        <artifactId>mcn-boot-parent</artifactId>
+        <groupId>cn.hiboot.mcn</groupId>
+        <version>2.2.6</version>
     </parent>
 
     <properties>
@@ -25,31 +25,21 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hiekn.boot</groupId>
-            <artifactId>mcn-swagger2-ui</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.hiekn.boot</groupId>
+            <groupId>cn.hiboot.mcn</groupId>
             <artifactId>mcn-spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hiboot.mcn</groupId>
+            <artifactId>mvc-swagger2</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
@@ -77,22 +67,6 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.auth0</groupId>
-            <artifactId>java-jwt</artifactId>
-        </dependency>
-
-        <!--与cloud集成-->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>-->
-        <!--开启boot应用监控-->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>-->
-
     </dependencies>
 
     <build>
@@ -116,36 +90,6 @@
                 <configuration>
                     <skipTests>true</skipTests>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.hiekn.generator</groupId>
-                <artifactId>mcn-maven-plugin</artifactId>
-                <configuration>
-                    <propConfig>
-                        <property>
-                            <name>db.driver</name>
-                            <value>com.mysql.jdbc.Driver</value>
-                        </property>
-                        <property>
-                            <name>db.url</name>
-                            <value>jdbc:mysql://192.168.1.7:3306/meta_boot?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;useSSL=false</value>
-                        </property>
-                        <property>
-                            <name>db.user</name>
-                            <value>root</value>
-                        </property>
-                        <property>
-                            <name>db.password</name>
-                            <value>root@hiekn</value>
-                        </property>
-                        <property>
-                            <name>basePkg</name>
-                            <value>com.hiekn.metaboot</value>
-                        </property>
-                    </propConfig>
-                </configuration>
-
             </plugin>
 
         </plugins>

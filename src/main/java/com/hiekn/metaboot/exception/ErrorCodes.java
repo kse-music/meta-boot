@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.exception;
 
 
-import com.hiekn.boot.autoconfigure.base.exception.ErrorMsg;
+import cn.hiboot.mcn.core.exception.ErrorMsg;
 
 /*
     3xxxx:通用错误码定义
