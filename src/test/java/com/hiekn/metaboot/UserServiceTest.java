@@ -3,14 +3,15 @@ package com.hiekn.metaboot;
 import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class UserServiceTest extends MetaBootApplicationTest {
 
