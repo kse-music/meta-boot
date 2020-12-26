@@ -4,16 +4,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "sse")
 public class ConfigManage {
 
-    private String sseLocation;
+    private String location;
 
-    public String getSseLocation() {
-        return sseLocation;
+    public String getLocation() {
+        return location;
     }
 
-    public void setSseLocation(String sseLocation) {
-        this.sseLocation = sseLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
