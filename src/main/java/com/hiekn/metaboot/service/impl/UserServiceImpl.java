@@ -4,10 +4,12 @@ import cn.hiboot.mcn.core.exception.RestException;
 import cn.hiboot.mcn.core.exception.ServiceException;
 import cn.hiboot.mcn.core.service.BaseServiceImpl;
 import com.hiekn.metaboot.bean.UserBean;
+import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -19,8 +21,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserBean,String> implements
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
-//    @Autowired
-//    private UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 修改、删除、详情，需把资源的主ID作为查询参数
