@@ -1,6 +1,7 @@
 package com.hiekn.metaboot;
 
 import cn.hiboot.mcn.core.model.result.RestResp;
+import com.hiekn.metaboot.base.CommonSearch;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -24,19 +25,16 @@ public class UserServiceTest extends MetaBootApplicationTest {
 	@Test
 	public void testAssert(){
         assertSame(userService,userService);
-        assertTrue (2 < 3);
-        assertFalse(2 > 3);
         assertNotNull(userService);
-        assertNull(userService);
     }
 
     @Test
     @Sql(statements = "insert into user (id,email) values (1,'dh@gamil.com')")
     public void testSql(){
-        UserBean userBean = new UserBean();
+        CommonSearch userBean = new CommonSearch();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestResp<List<UserBean>> rd =  userService.listPage(userBean);
+        RestResp<List<UserBean>> rd =  userService.page(userBean);
         boolean flag =false;
         for (UserBean o : rd.getData()) {
             if("dh@gamil.com".equals(o.getEmail())){
@@ -49,10 +47,10 @@ public class UserServiceTest extends MetaBootApplicationTest {
 
     @Test
     public void mongoTemplateTest(){
-        UserBean userBean = new UserBean();
+        CommonSearch userBean = new CommonSearch();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestResp<List<UserBean>> rd =  userService.listPage(userBean);
+        RestResp<List<UserBean>> rd =  userService.page(userBean);
         mongoTemplate.insert(rd.getData(),"table");
     }
 

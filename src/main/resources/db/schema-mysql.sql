@@ -1,3 +1,5 @@
+alter database meta_boot character set utf8mb4 collate utf8mb4_general_ci;
+
 CREATE TABLE `tb_user` (
   `id` varchar(32) NOT NULL,
   `mobile` varchar(32) DEFAULT NULL,
@@ -10,4 +12,4 @@ CREATE TABLE `tb_user` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` char(1) DEFAULT '1' COMMENT '0:待审核,1:正常,2:禁用,3:删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;

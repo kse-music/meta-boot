@@ -1,14 +1,13 @@
 package com.hiekn.metaboot.rest;
 
 import cn.hiboot.mcn.core.model.result.RestResp;
+import com.hiekn.metaboot.base.CommonSearch;
 import com.hiekn.metaboot.bean.UserBean;
 import com.hiekn.metaboot.service.UserService;
-import com.hiekn.metaboot.util.CommonUtils;
 import com.hiekn.metaboot.validator.group.Update;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,52 +15,43 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "users",produces = MediaType.APPLICATION_JSON_VALUE)
-@Api("用户模块")
+@RequestMapping("users")
+@Api(tags = "用户模块")
 public class UserRestApi {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("page")
+    @PostMapping("page")
     @ApiOperation("分页")
-    public RestResp<List<UserBean>> listPage(UserBean userBean) {
-        return userService.listPage(userBean);
+    public RestResp<List<UserBean>> listPage(@RequestBody CommonSearch commonSearch) {
+        return userService.page(commonSearch);
     }
 
-    @GetMapping
-    @ApiOperation("列表")
-    public RestResp<List<UserBean>> list() {
-        return new RestResp<>(userService.selectByCondition(null));
-    }
-
-    @GetMapping("{id}")
+    @GetMapping("get/{id}")
     @ApiOperation("获取")
     public RestResp<UserBean> get(@PathVariable String id) {
-        userService.assertSelfData(id);
-        return new RestResp<>(userService.getByPrimaryKey(id));
+        return new RestResp<>(userService.getById(id));
     }
 
     @DeleteMapping("{id}")
     @ApiOperation("删除")
-    public RestResp delete(@PathVariable String id) {
-        userService.assertSelfData(id);
-        userService.deleteByPrimaryKey(id);
+    public RestResp<?> delete(@PathVariable String id) {
+        userService.deleteById(id);
         return new RestResp<>();
     }
 
-    @PostMapping
+    @PostMapping("save")
     @ApiOperation("新增")
     public RestResp<UserBean> add(@Valid UserBean userBean) {
-        userBean.setId(CommonUtils.getRandomUUID());
-        userService.saveSelective(userBean);
+        userService.save(userBean);
         return new RestResp<>(userBean);
     }
 
-    @PutMapping
+    @PutMapping("update/{id}")
     @ApiOperation("修改")
-    public RestResp update(@Validated(Update.class) UserBean userBean) {
-        userService.updateByPrimaryKeySelective(userBean);
+    public RestResp<?> update(@PathVariable String id,@Validated(Update.class) UserBean userBean) {
+        userService.updateById(id,userBean);
         return new RestResp<>();
     }
 

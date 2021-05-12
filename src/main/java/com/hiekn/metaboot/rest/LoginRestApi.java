@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @RestController
-@RequestMapping(value = "/",produces = MediaType.APPLICATION_JSON_VALUE)
-@Api("登陆模块")
+@RequestMapping("/")
+@Api(tags = "登陆模块")
 public class LoginRestApi {
 
     @Autowired
@@ -33,7 +32,7 @@ public class LoginRestApi {
 
     @PostMapping("logout")
     @ApiOperation("登出")
-    public RestResp logout(){
+    public RestResp<?> logout(){
         userService.logout();
         return new RestResp<>();
     }

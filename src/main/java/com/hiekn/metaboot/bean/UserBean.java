@@ -5,14 +5,22 @@ import com.hiekn.metaboot.validator.UserBeanValidator;
 import com.hiekn.metaboot.validator.group.Insert;
 import com.hiekn.metaboot.validator.group.Update;
 
+import javax.persistence.*;
 import javax.validation.GroupSequence;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @UserBeanValidator
 @GroupSequence({Insert.class,UserBean.class})
+@Table(name = "tb_user")
+@Entity
 public class UserBean extends BaseModel {
 
     @NotEmpty(groups = Update.class)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Pattern(regexp = "^\\d{11}$",message = "请填写正确的手机号",groups = Insert.class)
