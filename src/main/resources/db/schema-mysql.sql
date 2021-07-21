@@ -1,5 +1,3 @@
-alter database meta_boot character set utf8mb4 collate utf8mb4_general_ci;
-
 CREATE TABLE `tb_user` (
   `id` varchar(32) NOT NULL,
   `mobile` varchar(32) DEFAULT NULL,
