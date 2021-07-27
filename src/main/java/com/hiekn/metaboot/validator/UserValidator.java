@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE,ElementType.FIELD,ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidatorForUserBean.class)
-public @interface UserBeanValidator {
+@Constraint(validatedBy = ValidatorForUser.class)
+public @interface UserValidator {
 
     String message() default "存在不合法的参数";
 

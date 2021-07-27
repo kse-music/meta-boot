@@ -1,17 +1,18 @@
 package com.hiekn.metaboot.rest;
 
+import cn.hiboot.mcn.autoconfigure.web.validator.group.DefaultCrud;
 import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.base.CommonSearch;
-import com.hiekn.metaboot.bean.UserBean;
+import com.hiekn.metaboot.bean.param.UserParam;
+import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.struct.BeanStruct;
 import com.hiekn.metaboot.service.UserService;
-import com.hiekn.metaboot.validator.group.Update;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,9 @@ public class UserRestApi {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BeanStruct beanStruct;
 
     @PostMapping("page")
     @ApiOperation("分页")
@@ -43,15 +47,16 @@ public class UserRestApi {
 
     @PostMapping("save")
     @ApiOperation("新增")
-    public RestResp<UserBean> add(@Valid UserBean userBean) {
+    public RestResp<UserBean> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
+        UserBean userBean = beanStruct.toUserBean(userParam);
         userService.save(userBean);
         return new RestResp<>(userBean);
     }
 
     @PutMapping("update/{id}")
     @ApiOperation("修改")
-    public RestResp<?> update(@PathVariable String id,@Validated(Update.class) UserBean userBean) {
-        userService.updateById(id,userBean);
+    public RestResp<?> update(@PathVariable String id,@Validated(DefaultCrud.Update.class) UserParam userParam) {
+        userService.updateById(id,userService.save(beanStruct.toUserBean(userParam)));
         return new RestResp<>();
     }
 

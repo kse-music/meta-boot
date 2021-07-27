@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.service.impl;
 
 import cn.hiboot.mcn.core.exception.ServiceException;
-import com.hiekn.metaboot.bean.UserBean;
+import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         if(Objects.isNull(user)){
             throw ServiceException.newInstance(ErrorCodes.NOT_FOUND_ERROR);
         }
-        if(!Objects.equals(DigestUtils.md5Digest(password.getBytes()), user.getPassword())){
+        if(!Objects.equals(new String(DigestUtils.md5Digest(password.getBytes())), user.getPassword())){
             throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
         }
         user.setPassword(null);
