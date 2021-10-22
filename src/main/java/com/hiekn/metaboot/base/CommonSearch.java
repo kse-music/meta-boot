@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.base;
 
+import cn.hiboot.mcn.core.model.base.PageSort;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class CommonSearch extends PageSort{
+public class CommonSearch extends PageSort {
 
 
 }

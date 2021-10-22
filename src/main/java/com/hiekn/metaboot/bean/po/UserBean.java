@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.bean.po;
 
-import cn.hiboot.mcn.core.model.BaseModel;
+import cn.hiboot.mcn.core.model.base.BaseBean;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
-public class UserBean extends BaseModel {
+public class UserBean extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,9 +1,9 @@
 package com.hiekn.metaboot.service;
 
-import com.hiekn.metaboot.base.BaseService;
+import cn.hiboot.mcn.core.service.JpaService;
 import com.hiekn.metaboot.bean.po.UserBean;
 
-public interface UserService extends BaseService<UserBean,String> {
+public interface UserService extends JpaService<UserBean,String> {
     UserBean getByMobile(String mobile);
     UserBean login(String mobile, String password);
     void logout();
