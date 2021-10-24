@@ -1,11 +1,11 @@
 package com.hiekn.metaboot.service.impl;
 
 import cn.hiboot.mcn.core.exception.ServiceException;
+import cn.hiboot.mcn.core.util.McnUtils;
 import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.dao.UserMapper;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
-import com.hiekn.metaboot.util.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void beforeSave(UserBean data) {
-        data.setId(CommonUtils.getRandomUUID());
+        data.setId(McnUtils.simpleUUID());
     }
 
     @Override
