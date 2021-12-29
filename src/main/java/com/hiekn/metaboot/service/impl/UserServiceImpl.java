@@ -1,10 +1,10 @@
 package com.hiekn.metaboot.service.impl;
 
+import cn.hiboot.mcn.core.exception.ExceptionKeys;
 import cn.hiboot.mcn.core.exception.ServiceException;
 import cn.hiboot.mcn.core.util.McnUtils;
 import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.dao.UserMapper;
-import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +44,10 @@ public class UserServiceImpl implements UserService {
     public UserBean login(String mobile, String password) {
         UserBean user = getByMobile(mobile);
         if(Objects.isNull(user)){
-            throw ServiceException.newInstance(ErrorCodes.NOT_FOUND_ERROR);
+            throw ServiceException.newInstance(ExceptionKeys.NOT_FOUND_ERROR);
         }
         if(!Objects.equals(new String(DigestUtils.md5Digest(password.getBytes())), user.getPassword())){
-            throw ServiceException.newInstance(ErrorCodes.USER_PWD_ERROR);
+            throw ServiceException.newInstance(ExceptionKeys.USER_PWD_ERROR);
         }
         user.setPassword(null);
         return user;
