@@ -1,7 +1,7 @@
 package com.hiekn.metaboot;
 
 import cn.hiboot.mcn.core.model.result.RestResp;
-import com.hiekn.metaboot.base.CommonSearch;
+import com.hiekn.metaboot.bean.base.CommonSearch;
 import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.service.UserService;
 import org.junit.jupiter.api.Test;

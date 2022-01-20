@@ -2,7 +2,7 @@ package com.hiekn.metaboot.rest;
 
 import cn.hiboot.mcn.autoconfigure.web.validator.group.DefaultCrud;
 import cn.hiboot.mcn.core.model.result.RestResp;
-import com.hiekn.metaboot.base.CommonSearch;
+import com.hiekn.metaboot.bean.base.CommonSearch;
 import com.hiekn.metaboot.bean.param.UserParam;
 import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.bean.struct.BeanStruct;
@@ -29,7 +29,9 @@ public class UserRestApi {
     @PostMapping("page")
     @ApiOperation("分页")
     public RestResp<List<UserBean>> listPage(@RequestBody CommonSearch commonSearch) {
-        return userService.page(commonSearch);
+        UserBean userBean = new UserBean();
+        userBean.setNickname(commonSearch.getName());
+        return userService.page(userBean,commonSearch);
     }
 
     @GetMapping("get/{id}")

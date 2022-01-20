@@ -1,17 +1,13 @@
 package com.hiekn.metaboot.service.impl;
 
-import cn.hiboot.mcn.core.exception.ExceptionKeys;
 import cn.hiboot.mcn.core.exception.ServiceException;
 import cn.hiboot.mcn.core.util.McnUtils;
 import com.hiekn.metaboot.bean.po.UserBean;
-import com.hiekn.metaboot.dao.UserMapper;
+import com.hiekn.metaboot.dao.UserRepository;
+import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import java.util.Objects;
 
@@ -19,12 +15,15 @@ import java.util.Objects;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    public JpaRepository<UserBean, String> getRepository() {
-        return userMapper;
+    public UserRepository getRepository() {
+        return userRepository;
     }
 
     @Override
@@ -35,28 +34,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserBean getByMobile(String mobile) {
         log.debug("请使用logger.debug替代System.out.println()！！！");
-        UserBean userBean = new UserBean();
-        userBean.setMobile(mobile);
-        return userMapper.findOne(Example.of(userBean)).orElse(null);
-    }
-
-    @Override
-    public UserBean login(String mobile, String password) {
-        UserBean user = getByMobile(mobile);
-        if(Objects.isNull(user)){
-            throw ServiceException.newInstance(ExceptionKeys.NOT_FOUND_ERROR);
+        UserBean userBean = getRepository().findByMobile(mobile);
+        if(Objects.isNull(userBean)){
+            throw ServiceException.newInstance(ErrorCodes.USER_NOT_FOUND);
         }
-        if(!Objects.equals(new String(DigestUtils.md5Digest(password.getBytes())), user.getPassword())){
-            throw ServiceException.newInstance(ExceptionKeys.USER_PWD_ERROR);
-        }
-        user.setPassword(null);
-        return user;
-    }
-
-
-    @Override
-    public void logout() {
-
+        return userBean;
     }
 
 }

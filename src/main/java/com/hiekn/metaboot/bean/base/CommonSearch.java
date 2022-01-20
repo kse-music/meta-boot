@@ -1,4 +1,4 @@
-package com.hiekn.metaboot.base;
+package com.hiekn.metaboot.bean.base;
 
 import cn.hiboot.mcn.core.model.base.PageSort;
 import lombok.Getter;
@@ -14,5 +14,6 @@ import lombok.Setter;
 @Getter
 public class CommonSearch extends PageSort {
 
+    private String name;
 
 }
