@@ -7,14 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
-public final class CommonUtils {
+public abstract class CommonUtils {
 
 	private static final DateTimeFormatter sdf0 = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 	private static final DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	private static final DateTimeFormatter sdfDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static final DateTimeFormatter sdfTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-	private CommonUtils(){}
 
 	public static String formatNowDate() {
 		return formatDateTime(LocalDateTime.now());

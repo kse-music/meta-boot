@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.validator;
 
-import cn.hiboot.mcn.autoconfigure.web.validator.ConstraintValidatorExtend;
+import cn.hiboot.mcn.autoconfigure.validator.ConstraintValidatorExtend;
 import com.hiekn.metaboot.bean.param.UserParam;
 import com.hiekn.metaboot.bean.po.UserBean;
 import com.hiekn.metaboot.service.UserService;
@@ -24,7 +24,7 @@ public class ValidatorForUser implements ConstraintValidatorExtend<UserValidator
         if(Objects.isNull(value)){
             return false;
         }
-        UserBean bean = userService.getByMobile(value.getMobile());
+        UserBean bean = userService.getRepository().findByUsername(value.getUsername());
         if(Objects.isNull(bean)){
             return true;
         }

@@ -1,17 +1,16 @@
 package com.hiekn.metaboot.bean.param;
 
-import cn.hiboot.mcn.autoconfigure.web.validator.Phone;
-import cn.hiboot.mcn.autoconfigure.web.validator.group.DefaultCrud;
+import cn.hiboot.mcn.autoconfigure.validator.Phone;
+import cn.hiboot.mcn.autoconfigure.validator.group.DefaultCrud;
 import com.hiekn.metaboot.validator.UserSequenceProvider;
 import com.hiekn.metaboot.validator.UserValidator;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  * UserParam
@@ -26,22 +25,17 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class UserParam {
 
-    @NotEmpty(groups = DefaultCrud.Update.class)
-    private String id;
-
     @Phone
     @NotEmpty(groups = DefaultCrud.Create.class)
-    private String mobile;
+    private String username;
 
     @NotEmpty(groups = DefaultCrud.Create.class)
     private String nickname;
 
-    @NotBlank(message = "密码不能为空",groups = DefaultCrud.Create.class)
-    private String password;
-
     @Email
     private String email;
-    @NotNull
+
+    @Range(min = 1,max = 2)
     private Integer type;
 
     @NotEmpty(message = "position不能为空" , groups = {TypeA.class})

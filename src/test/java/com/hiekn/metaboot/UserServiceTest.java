@@ -1,8 +1,8 @@
 package com.hiekn.metaboot;
 
 import cn.hiboot.mcn.core.model.result.RestResp;
-import com.hiekn.metaboot.bean.base.CommonSearch;
 import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.search.CommonSearch;
 import com.hiekn.metaboot.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class UserServiceTest extends MetaBootApplicationTest {
         CommonSearch userBean = new CommonSearch();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestResp<List<UserBean>> rd =  userService.page(userBean);
+        RestResp<List<UserBean>> rd =  userService.page(new UserBean(),userBean);
         boolean flag =false;
         for (UserBean o : rd.getData()) {
             if("dh@gamil.com".equals(o.getEmail())){
@@ -50,7 +50,7 @@ public class UserServiceTest extends MetaBootApplicationTest {
         CommonSearch userBean = new CommonSearch();
         userBean.setPageNo(1);
         userBean.setPageSize(10);
-        RestResp<List<UserBean>> rd =  userService.page(userBean);
+        RestResp<List<UserBean>> rd =  userService.page(new UserBean(),userBean);
         mongoTemplate.insert(rd.getData(),"table");
     }
 

@@ -1,12 +1,12 @@
 package com.hiekn.metaboot.dao;
 
+import cn.hiboot.mcn.autoconfigure.jpa.BaseRepository;
 import com.hiekn.metaboot.bean.po.UserBean;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserBean, String> {
+public interface UserRepository extends BaseRepository<UserBean, Integer> {
 
-    UserBean findByMobile(String mobile);
+    UserBean findByUsername(String username);
 
 }

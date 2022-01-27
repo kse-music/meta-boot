@@ -1,4 +1,4 @@
-package com.hiekn.metaboot.bean.base;
+package com.hiekn.metaboot.bean.search;
 
 import cn.hiboot.mcn.core.model.base.PageSort;
 import lombok.Getter;

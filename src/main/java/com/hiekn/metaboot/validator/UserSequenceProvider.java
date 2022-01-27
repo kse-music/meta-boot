@@ -17,20 +17,17 @@ public class UserSequenceProvider implements DefaultGroupSequenceProvider<UserPa
     @Override
     public List<Class<?>> getValidationGroups(UserParam object) {
         List<Class<?>> defaultGroupSequence = new ArrayList<>();
-
         defaultGroupSequence.add(UserParam.class);
-
-        if(object != null){
-
-            if (1 == object.getType()) {
-                defaultGroupSequence.add(UserParam.TypeA.class);
-            }
-
-            if (2 == object.getType()) {
-                defaultGroupSequence.add(UserParam.TypeB.class);
+        if(object != null) {
+            Integer type = object.getType();
+            if (type != null) {
+                if (1 == type) {
+                    defaultGroupSequence.add(UserParam.TypeA.class);
+                }else if (2 == type) {
+                    defaultGroupSequence.add(UserParam.TypeB.class);
+                }
             }
         }
-
         return defaultGroupSequence;
     }
 

@@ -1,13 +1,12 @@
 CREATE TABLE `tb_user` (
-  `id` varchar(32) NOT NULL,
-  `mobile` varchar(32) DEFAULT NULL,
-  `nickname` varchar(128) DEFAULT NULL,
-  `password` varchar(128) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `nickname` varchar(128) NOT NULL,
   `email` varchar(128) DEFAULT NULL,
   `gender` char(1) DEFAULT NULL COMMENT '1:男，2:女',
   `company` varchar(128) DEFAULT NULL,
+  `status` char(1) DEFAULT '1' NOT NULL COMMENT '0:待审核,1:正常,2:禁用,3:删除',
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` char(1) DEFAULT '1' COMMENT '0:待审核,1:正常,2:禁用,3:删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_general_ci;
