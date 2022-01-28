@@ -7,7 +7,7 @@ import cn.hiboot.mcn.autoconfigure.validator.group.DefaultCrud;
 import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.bean.param.UserParam;
 import com.hiekn.metaboot.bean.po.UserBean;
-import com.hiekn.metaboot.bean.search.UserBeanSearch;
+import com.hiekn.metaboot.bean.search.UserSearch;
 import com.hiekn.metaboot.bean.struct.BeanStruct;
 import com.hiekn.metaboot.service.UserService;
 import io.swagger.annotations.Api;
@@ -57,12 +57,12 @@ public class UserRestApi {
 
     @PostMapping("page")
     @ApiOperation("分页")
-    public RestResp<List<UserBean>> listPage(@RequestBody UserBeanSearch userBeanSearch) {
+    public RestResp<List<UserBean>> listPage(@RequestBody UserSearch userSearch) {
         UserBean userBean = new UserBean();
-        userBean.setNickname(userBeanSearch.getStatus());
+        userBean.setNickname(userSearch.getStatus());
         return userService.page(Specifications.and(userBean
-                ,new FieldLikePredicate<>("nickname", userBeanSearch.getName())
-                ,new DateBetweenPredicate<>("createAt", userBeanSearch.getStarTime(), userBeanSearch.getEndTime())),userBeanSearch);
+                ,new FieldLikePredicate<>("nickname", userSearch.getName())
+                ,new DateBetweenPredicate<>("createAt", userSearch.getStarTime(), userSearch.getEndTime())),userSearch);
     }
 
     @GetMapping("get/{id}")

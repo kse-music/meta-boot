@@ -1,6 +1,6 @@
 package com.hiekn.metaboot.bean.param;
 
-import cn.hiboot.mcn.autoconfigure.validator.Phone;
+import cn.hiboot.mcn.autoconfigure.validator.annotation.Phone;
 import cn.hiboot.mcn.autoconfigure.validator.group.DefaultCrud;
 import com.hiekn.metaboot.validator.UserSequenceProvider;
 import com.hiekn.metaboot.validator.UserValidator;

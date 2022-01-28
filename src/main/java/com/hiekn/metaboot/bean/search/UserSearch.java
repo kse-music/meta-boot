@@ -1,5 +1,6 @@
 package com.hiekn.metaboot.bean.search;
 
+import cn.hiboot.mcn.core.model.base.PageSort;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +15,8 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class UserBeanSearch extends CommonSearch{
+public class UserSearch extends PageSort {
+    private String name;
     private String status;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date starTime;
