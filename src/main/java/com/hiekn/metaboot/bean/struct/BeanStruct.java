@@ -2,7 +2,7 @@ package com.hiekn.metaboot.bean.struct;
 
 
 import com.hiekn.metaboot.bean.param.UserParam;
-import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.po.User;
 import org.mapstruct.Mapper;
 
 /**
@@ -14,6 +14,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface BeanStruct {
 
-    UserBean toUserBean(UserParam userParam);
+    User toUserBean(UserParam userParam);
 
 }

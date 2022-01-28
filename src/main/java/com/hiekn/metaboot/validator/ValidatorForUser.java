@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.validator;
 
 import com.hiekn.metaboot.bean.param.UserParam;
-import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.po.User;
 import com.hiekn.metaboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +24,7 @@ public class ValidatorForUser implements ConstraintValidator<UserValidator, User
         if(Objects.isNull(value)){
             return false;
         }
-        UserBean bean = userService.getRepository().findByUsername(value.getUsername());
+        User bean = userService.getRepository().findByUsername(value.getUsername());
         if(Objects.isNull(bean)){
             return true;
         }

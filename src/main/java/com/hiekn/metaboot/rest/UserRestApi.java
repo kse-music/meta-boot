@@ -6,7 +6,7 @@ import cn.hiboot.mcn.autoconfigure.jpa.predicate.FieldLikePredicate;
 import cn.hiboot.mcn.autoconfigure.validator.group.DefaultCrud;
 import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.bean.param.UserParam;
-import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.po.User;
 import com.hiekn.metaboot.bean.search.UserSearch;
 import com.hiekn.metaboot.bean.struct.BeanStruct;
 import com.hiekn.metaboot.service.UserService;
@@ -35,8 +35,8 @@ public class UserRestApi {
 
     @PostMapping("save")
     @ApiOperation("新增")
-    public RestResp<UserBean> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
-        UserBean userBean = beanStruct.toUserBean(userParam);
+    public RestResp<User> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
+        User userBean = beanStruct.toUserBean(userParam);
         userService.save(userBean);
         return new RestResp<>(userBean);
     }
@@ -57,8 +57,8 @@ public class UserRestApi {
 
     @PostMapping("page")
     @ApiOperation("分页")
-    public RestResp<List<UserBean>> listPage(@RequestBody UserSearch userSearch) {
-        UserBean userBean = new UserBean();
+    public RestResp<List<User>> listPage(@RequestBody UserSearch userSearch) {
+        User userBean = new User();
         userBean.setNickname(userSearch.getStatus());
         return userService.page(Specifications.and(userBean
                 ,new FieldLikePredicate<>("nickname", userSearch.getName())
@@ -67,7 +67,7 @@ public class UserRestApi {
 
     @GetMapping("get/{id}")
     @ApiOperation("获取")
-    public RestResp<UserBean> get(@PathVariable Integer id) {
+    public RestResp<User> get(@PathVariable Integer id) {
         return new RestResp<>(userService.getById(id));
     }
 

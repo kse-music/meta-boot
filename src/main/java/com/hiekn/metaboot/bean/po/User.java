@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Getter
 @DynamicInsert
 @Entity
-@Table(name = "tb_user")
-public class UserBean extends BaseBean {
+@Table(name = "m_user")
+public class User extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +25,6 @@ public class UserBean extends BaseBean {
     private String email;
 
     private String gender;
-
-    private String company;
 
     private String status;
 

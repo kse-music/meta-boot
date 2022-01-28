@@ -1,7 +1,7 @@
 package com.hiekn.metaboot.service.impl;
 
 import cn.hiboot.mcn.core.exception.ServiceException;
-import com.hiekn.metaboot.bean.po.UserBean;
+import com.hiekn.metaboot.bean.po.User;
 import com.hiekn.metaboot.dao.UserRepository;
 import com.hiekn.metaboot.exception.ErrorCodes;
 import com.hiekn.metaboot.service.UserService;
@@ -27,10 +27,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserBean getByMobile(String mobile) {
-        UserBean userBean = getRepository().findByUsername(mobile);
+    public User getByMobile(String mobile) {
+        User userBean = getRepository().findByUsername(mobile);
         if(Objects.isNull(userBean)){
-            log.debug("{} not exist",mobile);
+            log.error("{} not exist",mobile);
             throw ServiceException.newInstance(ErrorCodes.USER_NOT_FOUND);
         }
         return userBean;
