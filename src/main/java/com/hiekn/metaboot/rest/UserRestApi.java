@@ -41,7 +41,7 @@ public class UserRestApi {
         return new RestResp<>(userBean);
     }
 
-    @PostMapping("{id}")
+    @PostMapping("delete/{id}")
     @ApiOperation("删除")
     public RestResp<?> delete(@PathVariable Integer id) {
         userService.deleteById(id);
