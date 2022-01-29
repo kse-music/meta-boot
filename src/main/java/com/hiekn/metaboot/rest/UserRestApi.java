@@ -36,22 +36,22 @@ public class UserRestApi {
     @PostMapping("save")
     @ApiOperation("新增")
     public RestResp<User> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
-        User userBean = beanStruct.toUserBean(userParam);
+        User userBean = beanStruct.toUser(userParam);
         userService.save(userBean);
         return new RestResp<>(userBean);
     }
 
-    @DeleteMapping("{id}")
+    @PostMapping("{id}")
     @ApiOperation("删除")
     public RestResp<?> delete(@PathVariable Integer id) {
         userService.deleteById(id);
         return new RestResp<>();
     }
 
-    @PutMapping("update/{id}")
+    @PostMapping("update/{id}")
     @ApiOperation("修改")
     public RestResp<?> update(@PathVariable Integer id,@Validated(DefaultCrud.Update.class) @RequestBody UserParam userParam) {
-        userService.updateById(id,beanStruct.toUserBean(userParam));
+        userService.updateById(id,beanStruct.toUser(userParam));
         return new RestResp<>();
     }
 

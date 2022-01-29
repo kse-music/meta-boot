@@ -14,6 +14,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface BeanStruct {
 
-    User toUserBean(UserParam userParam);
+    User toUser(UserParam userParam);
 
 }
