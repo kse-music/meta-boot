@@ -6,7 +6,6 @@ import com.hiekn.metaboot.bean.search.UserSearch;
 import com.hiekn.metaboot.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -18,9 +17,6 @@ public class UserServiceTest extends MetaBootApplicationTest {
 
     @Autowired
 	private UserService userService;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
 	@Test
 	public void testAssert(){
@@ -43,20 +39,6 @@ public class UserServiceTest extends MetaBootApplicationTest {
             }
         }
         assertTrue (flag);
-    }
-
-    @Test
-    public void mongoTemplateTest(){
-        UserSearch userBean = new UserSearch();
-        userBean.setPageNo(1);
-        userBean.setPageSize(10);
-        RestResp<List<User>> rd =  userService.page(new User(),userBean);
-        mongoTemplate.insert(rd.getData(),"table");
-    }
-
-    @Test
-    public void redisTemplateTest(){
-//        stringRedisTemplate.opsForValue().set("key","value");
     }
 
 }
