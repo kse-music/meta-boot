@@ -19,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * 用户模块
+ */
 @RestController
 @RequestMapping("user")
 @Api(tags = "用户模块")
@@ -33,6 +36,10 @@ public class UserRestApi {
         this.userService = userService;
     }
 
+    /**
+     * 新增
+     * @param userParam 用户参数
+     */
     @PostMapping("save")
     @ApiOperation("新增")
     public RestResp<User> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
@@ -41,6 +48,10 @@ public class UserRestApi {
         return new RestResp<>(userBean);
     }
 
+    /**
+     * 删除
+     * @param id 用户id
+     */
     @PostMapping("delete/{id}")
     @ApiOperation("删除")
     public RestResp<?> delete(@PathVariable Integer id) {
@@ -48,6 +59,10 @@ public class UserRestApi {
         return new RestResp<>();
     }
 
+    /**
+     * 修改
+     * @param userParam 用户参数
+     */
     @PostMapping("update/{id}")
     @ApiOperation("修改")
     public RestResp<?> update(@PathVariable Integer id,@Validated(DefaultCrud.Update.class) @RequestBody UserParam userParam) {
@@ -55,6 +70,10 @@ public class UserRestApi {
         return new RestResp<>();
     }
 
+    /**
+     * 分页
+     * @param userSearch 用户参数
+     */
     @PostMapping("page")
     @ApiOperation("分页")
     public RestResp<List<User>> listPage(@RequestBody UserSearch userSearch) {
@@ -65,12 +84,20 @@ public class UserRestApi {
                 ,new DateBetweenPredicate<>("createAt", userSearch.getStarTime(), userSearch.getEndTime())),userSearch);
     }
 
+    /**
+     * 详情
+     * @param id 用户id
+     */
     @GetMapping("get/{id}")
     @ApiOperation("获取")
     public RestResp<User> get(@PathVariable Integer id) {
         return new RestResp<>(userService.getById(id));
     }
 
+    /**
+     * 上传文件
+     * @param file 文件
+     */
     @PostMapping("upload")
     public RestResp<String> upload(@RequestPart MultipartFile file) {
         return new RestResp<>(file.getOriginalFilename());

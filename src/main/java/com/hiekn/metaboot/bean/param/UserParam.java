@@ -25,27 +25,52 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 public class UserParam {
 
+    /**
+     * 用户名
+     */
     @Phone
     @NotEmpty(groups = DefaultCrud.Create.class)
     private String username;
 
+    /**
+     * 昵称
+     */
     @NotEmpty(groups = DefaultCrud.Create.class)
     private String nickname;
 
+    /**
+     * 邮箱
+     */
     @Email
     private String email;
 
+    /**
+     * 类型
+     */
     @Range(min = 1,max = 2)
     private Integer type;
 
+    /**
+     * 职位
+     */
     @NotEmpty(message = "position不能为空" , groups = {TypeA.class})
     private String position;
 
+    /**
+     * 性别
+     * @mock 男
+     */
     private String gender;
 
+    /**
+     * 公司
+     */
     @NotEmpty(message = "company不能为空" , groups = {TypeB.class})
     private String company;
 
+    /**
+     * 状态
+     */
     private String status;
 
     /**
