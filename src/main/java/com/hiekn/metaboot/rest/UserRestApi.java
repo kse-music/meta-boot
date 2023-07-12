@@ -78,7 +78,7 @@ public class UserRestApi {
     @ApiOperation("分页")
     public RestResp<List<User>> listPage(@RequestBody UserSearch userSearch) {
         User userBean = new User();
-        userBean.setNickname(userSearch.getStatus());
+        userBean.setStatus(userSearch.getStatus());
         return userService.page(Specifications.withAnd(userBean
                 ,new FieldLikePredicate<>("nickname", userSearch.getName())
                 ,new DateBetweenPredicate<>("createAt", userSearch.getStarTime(), userSearch.getEndTime())),userSearch);
