@@ -1,4 +1,4 @@
-package com.hiekn.metaboot;
+package com.hiekn.metaboot.test;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;

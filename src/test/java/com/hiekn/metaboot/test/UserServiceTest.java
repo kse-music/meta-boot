@@ -1,4 +1,4 @@
-package com.hiekn.metaboot;
+package com.hiekn.metaboot.test;
 
 import cn.hiboot.mcn.core.model.result.RestResp;
 import com.hiekn.metaboot.bean.po.User;
@@ -10,7 +10,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class UserServiceTest extends MetaBootApplicationTest {
@@ -18,14 +18,8 @@ public class UserServiceTest extends MetaBootApplicationTest {
     @Autowired
 	private UserService userService;
 
-	@Test
-	public void testAssert(){
-        assertSame(userService,userService);
-        assertNotNull(userService);
-    }
-
     @Test
-    @Sql(statements = "insert into user (id,email) values (1,'dh@gamil.com')")
+    @Sql(statements = "insert into m_user (id,username,nickname,email) values (3,'username','nickname','dh@gamil.com')")
     public void testSql(){
         UserSearch userBean = new UserSearch();
         userBean.setPageNo(1);
