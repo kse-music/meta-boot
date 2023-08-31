@@ -23,7 +23,10 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
         <dependency>
             <groupId>cn.hiboot.mcn</groupId>
             <artifactId>mcn-spring-boot-starter</artifactId>
@@ -39,6 +42,18 @@
         <dependency>
             <groupId>cn.hiboot.mcn</groupId>
             <artifactId>mvc-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
         </dependency>
 
         <dependency>
