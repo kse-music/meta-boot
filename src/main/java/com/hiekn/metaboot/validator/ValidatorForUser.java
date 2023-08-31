@@ -3,10 +3,10 @@ package com.hiekn.metaboot.validator;
 import com.hiekn.metaboot.bean.param.UserParam;
 import com.hiekn.metaboot.bean.po.User;
 import com.hiekn.metaboot.service.UserService;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
 public class ValidatorForUser implements ConstraintValidator<UserValidator, UserParam> {

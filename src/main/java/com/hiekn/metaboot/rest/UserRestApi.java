@@ -10,8 +10,8 @@ import com.hiekn.metaboot.bean.po.User;
 import com.hiekn.metaboot.bean.search.UserSearch;
 import com.hiekn.metaboot.bean.struct.BeanStruct;
 import com.hiekn.metaboot.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("user")
-@Api(tags = "用户模块")
+@Tag(name = "用户模块")
 public class UserRestApi {
 
     @Autowired
@@ -41,7 +41,7 @@ public class UserRestApi {
      * @param userParam 用户参数
      */
     @PostMapping("save")
-    @ApiOperation("新增")
+    @Operation(summary = "新增")
     public RestResp<User> add(@Validated(DefaultCrud.Create.class) @RequestBody UserParam userParam) {
         User userBean = beanStruct.toUser(userParam);
         userService.save(userBean);
@@ -53,7 +53,7 @@ public class UserRestApi {
      * @param id 用户id
      */
     @PostMapping("delete/{id}")
-    @ApiOperation("删除")
+    @Operation(summary = "删除")
     public RestResp<?> delete(@PathVariable Integer id) {
         userService.deleteById(id);
         return new RestResp<>();
@@ -64,7 +64,7 @@ public class UserRestApi {
      * @param userParam 用户参数
      */
     @PostMapping("update/{id}")
-    @ApiOperation("修改")
+    @Operation(summary = "修改")
     public RestResp<?> update(@PathVariable Integer id,@Validated(DefaultCrud.Update.class) @RequestBody UserParam userParam) {
         userService.updateById(id,beanStruct.toUser(userParam));
         return new RestResp<>();
@@ -75,7 +75,7 @@ public class UserRestApi {
      * @param userSearch 用户参数
      */
     @PostMapping("page")
-    @ApiOperation("分页")
+    @Operation(summary = "分页")
     public RestResp<List<User>> listPage(@RequestBody UserSearch userSearch) {
         User userBean = new User();
         userBean.setStatus(userSearch.getStatus());
@@ -89,7 +89,7 @@ public class UserRestApi {
      * @param id 用户id
      */
     @GetMapping("get/{id}")
-    @ApiOperation("获取")
+    @Operation(summary = "获取")
     public RestResp<User> get(@PathVariable Integer id) {
         return new RestResp<>(userService.getById(id));
     }
@@ -99,6 +99,7 @@ public class UserRestApi {
      * @param file 文件
      */
     @PostMapping("upload")
+    @Operation(summary = "上传")
     public RestResp<String> upload(@RequestPart MultipartFile file) {
         return new RestResp<>(file.getOriginalFilename());
     }

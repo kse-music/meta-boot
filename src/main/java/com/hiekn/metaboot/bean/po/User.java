@@ -1,11 +1,10 @@
 package com.hiekn.metaboot.bean.po;
 
 import cn.hiboot.mcn.core.model.base.BaseBean;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
-
-import javax.persistence.*;
 
 @Setter
 @Getter

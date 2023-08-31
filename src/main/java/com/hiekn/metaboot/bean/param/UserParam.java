@@ -4,13 +4,12 @@ import cn.hiboot.mcn.autoconfigure.validator.annotation.Phone;
 import cn.hiboot.mcn.autoconfigure.validator.group.DefaultCrud;
 import com.hiekn.metaboot.validator.UserSequenceProvider;
 import com.hiekn.metaboot.validator.UserValidator;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.group.GroupSequenceProvider;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * UserParam
