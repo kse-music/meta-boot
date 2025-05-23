@@ -13,7 +13,7 @@
     <parent>
         <artifactId>mcn-boot-starter-parent</artifactId>
         <groupId>cn.hiboot.mcn</groupId>
-        <version>3.4.1</version>
+        <version>3.5.0</version>
     </parent>
 
     <properties>
@@ -44,7 +44,7 @@
          </dependency>
         <dependency>
             <groupId>cn.hiboot.mcn</groupId>
-            <artifactId>mvc-swagger2</artifactId>
+            <artifactId>mcn-swagger3</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
