@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MetaBootApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("nacos.logging.default.config.enabled", "false");
 		SpringApplication.run(MetaBootApplication.class, args);
     }
 
